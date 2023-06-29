@@ -331,6 +331,7 @@ export const JiraLogo = createIcon({
     </g>
   ),
 });
+x;
 
 export const MastercardIcon = createIcon({
   displayName: "MastercardIcon",

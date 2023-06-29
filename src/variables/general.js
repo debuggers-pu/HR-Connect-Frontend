@@ -201,7 +201,7 @@ export const tablesTableData = [
     email: "alexa@simmmple.com",
     subdomain: "Manager",
     domain: "Organization",
-    status: "Online",
+    status: "Clocked In",
     date: "14/06/21",
   },
   {
@@ -210,7 +210,7 @@ export const tablesTableData = [
     email: "laurent@simmmple.com",
     subdomain: "Programmer",
     domain: "Developer",
-    status: "Offline",
+    status: "Absent",
     date: "12/05/21",
   },
   {
@@ -219,7 +219,7 @@ export const tablesTableData = [
     email: "laurent@simmmple.com",
     subdomain: "Executive",
     domain: "Projects",
-    status: "Online",
+    status: "Clocked In",
     date: "07/06/21",
   },
   {
@@ -228,7 +228,7 @@ export const tablesTableData = [
     email: "freduardo@simmmple.com",
     subdomain: "Manager",
     domain: "Organization",
-    status: "Online",
+    status: "Clocked In",
     date: "14/11/21",
   },
   {
@@ -237,7 +237,7 @@ export const tablesTableData = [
     email: "daniel@simmmple.com",
     subdomain: "Programmer",
     domain: "Developer",
-    status: "Offline",
+    status: "Absent",
     date: "21/01/21",
   },
   {
@@ -246,7 +246,7 @@ export const tablesTableData = [
     email: "mark@simmmple.com",
     subdomain: "Designer",
     domain: "UI/UX Design",
-    status: "Offline",
+    status: "Absent",
     date: "04/09/20",
   },
 ];

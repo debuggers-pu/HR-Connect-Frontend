@@ -31,32 +31,13 @@ export default function Footer(props) {
         <Text as="span">
           {document.documentElement.dir === "rtl"
             ? " مصنوع من ❤️ بواسطة"
-            : "Made with ❤️ by "}
+            : "Made with ❤️ by Sandesh Thapa ,Sandesh Poudel, Saurabh Bhujel, Sirish Burlakoti and Sushil Bastola "}
         </Text>
-        <Link
-          // color={linkTeal}
-          color="teal.400"
-          href="https://www.creative-tim.com"
-          target="_blank"
-        >
-          {document.documentElement.dir === "rtl"
-            ? " توقيت الإبداعية"
-            : "Creative Tim "}
-        </Link>
-        &
-        <Link
-          // color={linkTeal}
-          color="teal.400"
-          href="https://www.simmmple.com"
-          target="_blank"
-        >
-          {document.documentElement.dir === "rtl" ? "سيممبل " : " Simmmple"}
-        </Link>
-        {document.documentElement.dir === "rtl"
+        {/* {document.documentElement.dir === "rtl"
           ? "للحصول على ويب أفضل"
-          : " for a better web"}
+          : " for a better web"} */}
       </Text>
-      <List display="flex">
+      {/* <List display="flex">
         <ListItem
           me={{
             base: "20px",
@@ -85,24 +66,16 @@ export default function Footer(props) {
             md: "44px",
           }}
         >
-          <Link
-            color="gray.400"
-            href="#blog"
-            href="https://creative-tim.com/blog"
-          >
+          <Link color="gray.400" href="#blog">
             {document.documentElement.dir === "rtl" ? "مدونة" : "Blog"}
           </Link>
         </ListItem>
         <ListItem>
-          <Link
-            color="gray.400"
-            href="#license"
-            href="https://www.creative-tim.com/license"
-          >
+          <Link color="gray.400" href="#license">
             {document.documentElement.dir === "rtl" ? "رخصة" : "License"}
           </Link>
         </ListItem>
-      </List>
+      </List> */}
     </Flex>
   );
 }

@@ -1,5 +1,9 @@
 // Chakra Icons
 import { BellIcon, SearchIcon } from "@chakra-ui/icons";
+import { MdWbSunny } from "react-icons/md";
+import { BsFillCloudMoonFill } from "react-icons/bs";
+import { IoSettingsSharp } from "react-icons/io5";
+
 // Chakra Imports
 import {
   Button,
@@ -13,6 +17,7 @@ import {
   MenuItem,
   MenuList,
   Text,
+  useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
 // Assets
@@ -31,6 +36,8 @@ import routes from "routes.js";
 
 export default function HeaderLinks(props) {
   const { variant, children, fixed, secondary, onOpen, ...rest } = props;
+
+  const { colorMode, toggleColorMode } = useColorMode();
 
   // Chakra Color Mode
   let mainTeal = useColorModeValue("teal.300", "teal.300");
@@ -51,7 +58,7 @@ export default function HeaderLinks(props) {
       alignItems="center"
       flexDirection="row"
     >
-      <InputGroup
+      {/* <InputGroup
         cursor="pointer"
         bg={inputBg}
         borderRadius="15px"
@@ -92,8 +99,9 @@ export default function HeaderLinks(props) {
           placeholder="Type here..."
           borderRadius="inherit"
         />
-      </InputGroup>
-      <NavLink to="/auth/signin">
+      </InputGroup> */}
+
+      {/* <NavLink to="/auth/signin">
         <Button
           ms="0px"
           px="0px"
@@ -117,24 +125,7 @@ export default function HeaderLinks(props) {
         >
           <Text display={{ sm: "none", md: "flex" }}>Sign In</Text>
         </Button>
-      </NavLink>
-      <SidebarResponsive
-        logoText={props.logoText}
-        secondary={props.secondary}
-        routes={routes}
-        // logo={logo}
-        {...rest}
-      />
-      <SettingsIcon
-        cursor="pointer"
-        ms={{ base: "16px", xl: "0px" }}
-        me="16px"
-        ref={settingsRef}
-        onClick={props.onOpen}
-        color={navbarIcon}
-        w="18px"
-        h="18px"
-      />
+      </NavLink> */}
       <Menu>
         <MenuButton>
           <BellIcon color={navbarIcon} w="18px" h="18px" />
@@ -171,6 +162,44 @@ export default function HeaderLinks(props) {
           </Flex>
         </MenuList>
       </Menu>
+      <Button onClick={toggleColorMode} mx={4}>
+        {colorMode === "light" ? <BsFillCloudMoonFill /> : <MdWbSunny />}
+        {colorMode === "light" ? " Dark" : " Light"}
+      </Button>
+      <SidebarResponsive
+        logoText={props.logoText}
+        secondary={props.secondary}
+        routes={routes}
+        // logo={logo}
+        {...rest}
+      />
+      {/* <SettingsIcon
+        cursor="pointer"
+        ms={{ base: "16px", xl: "0px" }}
+        me="16px"
+        ref={settingsRef}
+        onClick={props.onOpen}
+        color={navbarIcon}
+        w="18px"
+        h="18px"
+      /> */}
+
+      <NavLink to="/admin/profile">
+        <Button
+          me={{ sm: "2px", md: "16px" }}
+          color={navbarIcon}
+          variant="transparent-with-icon"
+          leftIcon={
+            document.documentElement.dir ? (
+              <IoSettingsSharp w="22px" h="22px" me="0px" />
+            ) : (
+              ""
+            )
+          }
+        >
+          <Text display={{ sm: "none", md: "flex" }}>Settings</Text>
+        </Button>
+      </NavLink>
     </Flex>
   );
 }

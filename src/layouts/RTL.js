@@ -1,7 +1,7 @@
 // Chakra imports
 import { ChakraProvider, Portal, useDisclosure } from "@chakra-ui/react";
 import { RtlProvider } from "components/RTLProvider/RTLProvider";
-import Configurator from "components/Configurator/Configurator";
+// import Configurator from "components/Configurator/Configurator";
 import Footer from "components/Footer/Footer.js";
 // Layout components
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
@@ -140,7 +140,7 @@ export default function Dashboard(props) {
               onOpen={onOpen}
             />
           </Portal>
-          <Configurator
+          {/* <Configurator
             secondary={getActiveNavbar(routes)}
             isOpen={isOpen}
             onClose={onClose}
@@ -150,7 +150,7 @@ export default function Dashboard(props) {
             }}
             onOpaque={() => setSidebarVariant("opaque")}
             onTransparent={() => setSidebarVariant("transparent")}
-          />
+          /> */}
         </MainPanel>
       </RtlProvider>
     </ChakraProvider>

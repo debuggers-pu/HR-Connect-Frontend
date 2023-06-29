@@ -16,9 +16,12 @@ import React, { Fragment } from "react";
 // import { BsArrowRight } from "react-icons/bs";
 import { BiDoorOpen } from "react-icons/bi";
 import ClockInModal from "./ClockInModal";
+import useDateTime from "hooks/useDateTime";
 
 const BuiltByDevelopers = ({ title, name, description, image }) => {
   const textColor = useColorModeValue("gray.700", "white");
+
+  const { presentDate, dayOfWeek } = useDateTime();
 
   // Clock In Modal
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -48,7 +51,11 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
               <Text fontSize="sm" color="gray.400" fontWeight="normal">
                 {description}
               </Text>
-              {/* <Spacer /> */}
+              <Spacer />
+              <Text as="b" fontSize="lg" ml={2}>
+                Today is {dayOfWeek},{presentDate}
+              </Text>
+
               <Flex align="center" fullWidth sx={{ marginTop: "24px" }}>
                 <Button
                   colorScheme="teal"
@@ -58,35 +65,6 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
                 >
                   Clock In
                 </Button>
-                {/* <Button
-                p="0px"
-                variant="no-hover"
-                bg="transparent"
-                my={{ sm: "1.5rem", lg: "0px" }}
-              >
-                <Text
-                  fontSize="sm"
-                  color={textColor}
-                  fontWeight="bold"
-                  cursor="pointer"
-                  transition="all .5s ease"
-                  my={{ sm: "1.5rem", lg: "0px" }}
-                  _hover={{ me: "4px" }}
-                >
-                  Read more
-                </Text>
-                <Icon
-                  as={BsArrowRight}
-                  w="20px"
-                  h="20px"
-                  fontSize="2xl"
-                  transition="all .5s ease"
-                  mx=".3rem"
-                  cursor="pointer"
-                  pt="4px"
-                  _hover={{ transform: "translateX(20%)" }}
-                />
-              </Button> */}
               </Flex>
             </Flex>
             <Spacer />
