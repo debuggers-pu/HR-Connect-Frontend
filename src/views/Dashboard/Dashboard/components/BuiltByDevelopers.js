@@ -56,7 +56,7 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
                 Today is {dayOfWeek},{presentDate}
               </Text>
 
-              <Flex align="center" fullWidth sx={{ marginTop: "24px" }}>
+              <Flex align="center" sx={{ marginTop: "24px" }}>
                 <Button
                   colorScheme="teal"
                   size="lg"
