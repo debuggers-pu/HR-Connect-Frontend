@@ -32,7 +32,6 @@ const ClockInModal = ({ isOpen, onClose }) => {
   );
 
   const { presentDate, time, amOrPm } = useDateTime();
-  console.log(presentDate);
 
   return (
     <>

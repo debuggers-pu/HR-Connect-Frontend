@@ -16,6 +16,7 @@ import {
   RocketIcon,
   SupportIcon,
 } from "components/Icons/Icons";
+import Events from "views/Dashboard/Events";
 
 var dashRoutes = [
   {
@@ -47,7 +48,7 @@ var dashRoutes = [
     name: "Events",
     rtlName: "لوحة القيادة",
     icon: <CreditIcon color="inherit" />,
-    component: Billing,
+    component: Events,
     layout: "/admin",
   },
 
