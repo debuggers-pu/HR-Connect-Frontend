@@ -20,34 +20,20 @@ function Profile() {
   );
 
   return (
-    <Flex direction='column'>
+    <Flex direction="column">
       <Header
         backgroundHeader={ProfileBgImage}
         backgroundProfile={bgProfile}
         avatarImage={avatar4}
         name={"Esthera Jackson"}
         email={"esthera@simmmple.com"}
-        tabs={[
-          {
-            name: "OVERVIEW",
-            icon: <FaCube w='100%' h='100%' />,
-          },
-          {
-            name: "TEAMS",
-            icon: <IoDocumentsSharp w='100%' h='100%' />,
-          },
-          {
-            name: "PROJECTS",
-            icon: <FaPenFancy w='100%' h='100%' />,
-          },
-        ]}
       />
-      <Grid templateColumns={{ sm: "1fr", xl: "repeat(3, 1fr)" }} gap='22px'>
-        <PlatformSettings
+      <Grid templateColumns={{ sm: "1fr", xl: "repeat(3, 1fr)" }} gap="22px">
+        {/* <PlatformSettings
           title={"Platform Settings"}
           subtitle1={"ACCOUNT"}
           subtitle2={"APPLICATION"}
-        />
+        /> */}
         <ProfileInformation
           title={"Profile Information"}
           description={
@@ -58,9 +44,9 @@ function Profile() {
           email={"esthera@simmmple.com"}
           location={"United States"}
         />
-        <Conversations title={"Conversations"} />
+        {/* <Conversations title={"Conversations"} /> */}
       </Grid>
-      <Projects title={"Projects"} description={"Architects design houses"} />
+      {/* <Projects title={"Projects"} description={"Architects design houses"} /> */}
     </Flex>
   );
 }

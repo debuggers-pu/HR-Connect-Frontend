@@ -80,14 +80,19 @@ function Billing() {
         </Box>
         <Invoices title={"Invoices"} data={invoicesData} />
       </Grid> */}
-      <Grid templateColumns={{ sm: "1fr", lg: "1.6fr 1.2fr" }}>
+      <Grid
+        templateColumns={{
+          sm: "1fr",
+          // , lg: "1.6fr 1.2fr"
+        }}
+      >
         <BillingInformation title={"Leave Requests"} data={billingData} />
-        <Transactions
+        {/* <Transactions
           title={"Leave Summary For This Week"}
           date={"23 - 30 March"}
           newestTransactions={newestTransactions}
           olderTransactions={olderTransactions}
-        />
+        /> */}
       </Grid>
     </Flex>
   );

@@ -3,6 +3,7 @@
 import { Box, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
 import SidebarContent from "./SidebarContent";
+import SideBarRoutes from "./SideBarRoutes.js";
 
 // FUNCTIONS
 
@@ -46,7 +47,7 @@ function Sidebar(props) {
           borderRadius={sidebarRadius}
         >
           <SidebarContent
-            routes={routes}
+            routes={SideBarRoutes}
             logoText={"HR CONNECT"}
             display="none"
             sidebarVariant={sidebarVariant}
