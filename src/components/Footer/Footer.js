@@ -4,7 +4,7 @@ import { Flex, Link, List, ListItem, Text } from "@chakra-ui/react";
 import PropTypes from "prop-types";
 
 export default function Footer(props) {
-  // const linkTeal = useColorModeValue("teal.400", "red.200");=
+  // const linkorange = useColorModeValue("orange.400", "red.200");=
   return (
     <Flex
       flexDirection={{
@@ -33,49 +33,7 @@ export default function Footer(props) {
             ? " مصنوع من ❤️ بواسطة"
             : "Made with ❤️ by Sandesh Thapa ,Sandesh Poudel, Saurabh Bhujel, Sirish Burlakoti and Sushil Bastola "}
         </Text>
-        {/* {document.documentElement.dir === "rtl"
-          ? "للحصول على ويب أفضل"
-          : " for a better web"} */}
       </Text>
-      {/* <List display="flex">
-        <ListItem
-          me={{
-            base: "20px",
-            md: "44px",
-          }}
-        >
-          <Link color="gray.400" href="https://www.creative-tim.com">
-            {document.documentElement.dir === "rtl"
-              ? "توقيت الإبداعية"
-              : "Creative Tim"}
-          </Link>
-        </ListItem>
-        <ListItem
-          me={{
-            base: "20px",
-            md: "44px",
-          }}
-        >
-          <Link color="gray.400" href="https://www.simmmple.com">
-            {document.documentElement.dir === "rtl" ? "سيممبل" : "Simmmple"}
-          </Link>
-        </ListItem>
-        <ListItem
-          me={{
-            base: "20px",
-            md: "44px",
-          }}
-        >
-          <Link color="gray.400" href="#blog">
-            {document.documentElement.dir === "rtl" ? "مدونة" : "Blog"}
-          </Link>
-        </ListItem>
-        <ListItem>
-          <Link color="gray.400" href="#license">
-            {document.documentElement.dir === "rtl" ? "رخصة" : "License"}
-          </Link>
-        </ListItem>
-      </List> */}
     </Flex>
   );
 }

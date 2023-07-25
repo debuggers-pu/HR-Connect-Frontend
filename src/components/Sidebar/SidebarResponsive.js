@@ -17,7 +17,9 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import IconBox from "components/Icons/IconBox";
-import { CreativeTimLogo } from "components/Icons/Icons";
+import Logo from "assets/logo.svg";
+import DarkLogo from "assets/darklogo.svg";
+
 import { Separator } from "components/Separator/Separator";
 
 import React from "react";
@@ -107,7 +109,7 @@ function SidebarResponsive(props) {
                   <Icon>{prop.icon}</Icon>
                 ) : (
                   <IconBox
-                    bg="teal.300"
+                    bg="#F29727"
                     color="white"
                     h="30px"
                     w="30px"
@@ -158,7 +160,7 @@ function SidebarResponsive(props) {
                 ) : (
                   <IconBox
                     bg={inactiveBg}
-                    color="teal.300"
+                    color="#F29727"
                     h="30px"
                     w="30px"
                     me="12px"
@@ -201,10 +203,11 @@ function SidebarResponsive(props) {
         alignItems="center"
         fontSize="11px"
       >
-        <CreativeTimLogo w="32px" h="32px" me="10px" />
-        <Text fontSize="sm" mt="3px">
-          {logoText}
-        </Text>
+        {localStorage?.getItem("chakra-ui-color-mode") === "light" ? (
+          <img src={Logo} w="32px" h="32px" me="10px" />
+        ) : (
+          <img src={DarkLogo} w="32px" h="32px" me="10px" />
+        )}
       </Link>
       <Separator></Separator>
     </Box>
@@ -225,7 +228,7 @@ function SidebarResponsive(props) {
         w="18px"
         h="18px"
         ref={btnRef}
-        colorScheme="teal"
+        colorScheme="orange"
         onClick={onOpen}
       />
       <Drawer

@@ -21,7 +21,7 @@ import { Redirect, useHistory } from "react-router-dom";
 
 function SignIn() {
   // Chakra color mode
-  const titleColor = useColorModeValue("teal.300", "teal.200");
+  const titleColor = useColorModeValue("#F29727", "#F29727");
   const textColor = useColorModeValue("gray.400", "white");
   const history = useHistory();
 
@@ -116,7 +116,7 @@ function SignIn() {
                 }}
               />
               <FormControl display="flex" alignItems="center">
-                <Switch id="remember-login" colorScheme="teal" me="10px" />
+                <Switch id="remember-login" colorScheme="orange" me="10px" />
                 <FormLabel
                   htmlFor="remember-login"
                   mb="0"
@@ -129,17 +129,17 @@ function SignIn() {
               <Button
                 fontSize="16px"
                 type="submit"
-                bg="teal.300"
+                bg="#F29727"
                 w="100%"
                 h="45"
                 mb="20px"
                 color="white"
                 mt="20px"
                 _hover={{
-                  bg: "teal.200",
+                  bg: "orange.400",
                 }}
                 _active={{
-                  bg: "teal.400",
+                  bg: "orange.500",
                 }}
                 onClick={handleSignIn}
               >

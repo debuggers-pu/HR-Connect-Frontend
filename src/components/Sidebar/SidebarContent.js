@@ -10,8 +10,10 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import IconBox from "components/Icons/IconBox";
-import { CreativeTimLogo } from "components/Icons/Icons";
+
 import { Separator } from "components/Separator/Separator";
+import Logo from "assets/logo.svg";
+import DarkLogo from "assets/darklogo.svg";
 
 import React from "react";
 import { NavLink, useLocation } from "react-router-dom";
@@ -101,7 +103,7 @@ const SidebarContent = ({ logoText, routes }) => {
                   <Icon>{prop.icon}</Icon>
                 ) : (
                   <IconBox
-                    bg="teal.300"
+                    bg="#F29727"
                     color="white"
                     h="30px"
                     w="30px"
@@ -152,7 +154,7 @@ const SidebarContent = ({ logoText, routes }) => {
                 ) : (
                   <IconBox
                     bg={inactiveBg}
-                    color="teal.300"
+                    color="#F29727"
                     h="30px"
                     w="30px"
                     me="12px"
@@ -189,10 +191,11 @@ const SidebarContent = ({ logoText, routes }) => {
           alignItems="center"
           fontSize="11px"
         >
-          <CreativeTimLogo w="32px" h="32px" me="10px" />
-          <Text fontSize="sm" mt="3px">
-            {logoText}
-          </Text>
+          {localStorage?.getItem("chakra-ui-color-mode") === "light" ? (
+            <img src={Logo} w="32px" h="32px" me="10px" />
+          ) : (
+            <img src={DarkLogo} w="32px" h="32px" me="10px" />
+          )}
         </Link>
         <Separator></Separator>
       </Box>
