@@ -27,13 +27,23 @@ import OrdersOverview from "./components/OrdersOverview";
 import Projects from "./components/Projects";
 import SalesOverview from "./components/SalesOverview";
 import WorkWithTheRockets from "./components/WorkWithTheRockets";
+import useCurrentUser from "hooks/useCurrentUser";
+import { Redirect } from "react-router-dom";
 
 export default function Dashboard() {
   const iconBoxInside = useColorModeValue("white", "white");
+  const { isAuthenticated, loading } = useCurrentUser();
+  console.log(isAuthenticated);
 
   return (
     <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>
       <SimpleGrid columns={{ sm: 1, md: 2, xl: 4 }} spacing="24px">
+        <MiniStatistics
+          title={"Total Employees"}
+          amount={"+3,020"}
+          percentage={-14}
+          icon={<DocumentIcon h={"24px"} w={"24px"} color={iconBoxInside} />}
+        />
         <MiniStatistics
           title={"Today's Attendence"}
           amount={"$53,000"}
@@ -46,12 +56,7 @@ export default function Dashboard() {
           percentage={5}
           icon={<GlobeIcon h={"24px"} w={"24px"} color={iconBoxInside} />}
         />
-        <MiniStatistics
-          title={"New Clients"}
-          amount={"+3,020"}
-          percentage={-14}
-          icon={<DocumentIcon h={"24px"} w={"24px"} color={iconBoxInside} />}
-        />
+
         <MiniStatistics
           title={"Total Sales"}
           amount={"$173,000"}

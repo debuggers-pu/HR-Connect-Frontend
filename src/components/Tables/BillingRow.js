@@ -1,3 +1,4 @@
+import React from "react";
 import {
   Box,
   Button,
@@ -6,8 +7,7 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-import React from "react";
-import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
+import { FaCheck, FaTrashAlt } from "react-icons/fa";
 
 function BillingRow(props) {
   const textColor = useColorModeValue("gray.700", "white");
@@ -20,24 +20,25 @@ function BillingRow(props) {
       <Flex justify="space-between" w="100%">
         <Flex direction="column" maxWidth="70%">
           <Text color={nameColor} fontSize="md" fontWeight="bold" mb="10px">
-            {name}
+            Employee Name: {name}
           </Text>
           <Text color="gray.400" fontSize="sm" fontWeight="semibold">
-            Company Name:{" "}
+            Leave Type:{" "}
             <Text as="span" color="gray.500">
               {company}
             </Text>
           </Text>
           <Text color="gray.400" fontSize="sm" fontWeight="semibold">
-            Email Address:{" "}
+            Leave Date :{" "}
             <Text as="span" color="gray.500">
-              {email}
+              {email} from yeti to uti
             </Text>
           </Text>
           <Text color="gray.400" fontSize="sm" fontWeight="semibold">
-            VAT Number:{" "}
+            Reason:{" "}
             <Text as="span" color="gray.500">
               {number}
+              fdssadsfadfsdsdfdasfdfsfdfssddfsdddasddassfsfadsfasdssdsfsadsfdfssd
             </Text>
           </Text>
         </Flex>
@@ -55,15 +56,15 @@ function BillingRow(props) {
             <Flex color="red.500" cursor="pointer" align="center" p="12px">
               <Icon as={FaTrashAlt} me="4px" />
               <Text fontSize="sm" fontWeight="semibold">
-                DELETE
+                REJECT
               </Text>
             </Flex>
           </Button>
           <Button p="0px" bg="transparent">
-            <Flex color={textColor} cursor="pointer" align="center" p="12px">
-              <Icon as={FaPencilAlt} me="4px" />
+            <Flex color={"green.500"} cursor="pointer" align="center" p="12px">
+              <Icon as={FaCheck} me="4px" />
               <Text fontSize="sm" fontWeight="semibold">
-                EDIT
+                APPROVE
               </Text>
             </Flex>
           </Button>

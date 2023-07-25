@@ -1,22 +1,21 @@
 // import
 import Dashboard from "views/Dashboard/Dashboard";
-import Tables from "views/Dashboard/Tables";
-import Billing from "views/Dashboard/Billing";
+import Attendence from "views/Dashboard/Attendence";
+import Leave from "views/Dashboard/Leave";
 import RTLPage from "views/Dashboard/RTL";
 import Profile from "views/Dashboard/Profile";
 import SignIn from "views/Auth/SignIn.js";
 import SignUp from "views/Auth/SignUp.js";
+import Events from "views/Dashboard/Events";
 
 import {
   HomeIcon,
   StatsIcon,
   CreditIcon,
-  PersonIcon,
   DocumentIcon,
   RocketIcon,
-  SupportIcon,
 } from "components/Icons/Icons";
-import Events from "views/Dashboard/Events";
+import { FaCalendarCheck, FaCog } from "react-icons/fa";
 
 var dashRoutes = [
   {
@@ -28,26 +27,26 @@ var dashRoutes = [
     layout: "/admin",
   },
   {
-    path: "/tables",
+    path: "/Attendence",
     name: "Attendence",
     // rtlName: "لوحة القيادة",
     icon: <StatsIcon color="inherit" />,
-    component: Tables,
+    component: Attendence,
     layout: "/admin",
   },
   {
-    path: "/billing",
+    path: "/leave",
     name: "Leave",
     rtlName: "لوحة القيادة",
     icon: <CreditIcon color="inherit" />,
-    component: Billing,
+    component: Leave,
     layout: "/admin",
   },
   {
     path: "/events",
     name: "Events",
     rtlName: "لوحة القيادة",
-    icon: <CreditIcon color="inherit" />,
+    icon: <FaCalendarCheck color="inherit" />,
     component: Events,
     layout: "/admin",
   },
@@ -68,9 +67,9 @@ var dashRoutes = [
     views: [
       {
         path: "/profile",
-        name: "Settings",
+        name: "Profile Settings",
         rtlName: "لوحة القيادة",
-        icon: <PersonIcon color="inherit" />,
+        icon: <FaCog color="inherit" />,
         secondaryNavbar: true,
         component: Profile,
         layout: "/admin",

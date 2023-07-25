@@ -2,14 +2,15 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 
 const instance = axios.create({
-  baseURL: `${process.env.BACKEND_URL}`,
+  baseURL: `${process.env.REACT_APP_BACKEND_URL}`,
+  // baseURL: `https://dummyjson.com/auth/`,
   timeout: 50000,
 });
 
 export { instance };
 
 const getHeader = (isAuthenticated, type = "application/json") => {
-  const storedToken = localStorage.getItem("accessToken");
+  const storedToken = localStorage.getItem("token");
   const headers = {};
   headers["Content-Type"] = type;
 
