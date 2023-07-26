@@ -191,10 +191,10 @@ const SidebarContent = ({ logoText, routes }) => {
           alignItems="center"
           fontSize="11px"
         >
-          {localStorage?.getItem("chakra-ui-color-mode") === "light" ? (
-            <img src={Logo} w="32px" h="32px" me="10px" />
-          ) : (
+          {!localStorage?.getItem("chakra-ui-color-mode") === "light" ? (
             <img src={DarkLogo} w="32px" h="32px" me="10px" />
+          ) : (
+            <img src={Logo} w="32px" h="32px" me="10px" />
           )}
         </Link>
         <Separator></Separator>

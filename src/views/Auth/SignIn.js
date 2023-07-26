@@ -42,7 +42,7 @@ function SignIn() {
   if (loading) {
     return <h1>LadoING,,,,.,.as,dsd,sa</h1>;
   }
-  console.log(loading);
+
   if (isAuthenticated) {
     return <Redirect to="/admin/dashboard" />;
   }
