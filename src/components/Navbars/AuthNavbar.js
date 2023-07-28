@@ -9,7 +9,6 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 import {
-  CreativeTimLogo,
   DocumentIcon,
   HomeIcon,
   PersonIcon,
@@ -20,6 +19,8 @@ import PropTypes from "prop-types";
 import React from "react";
 import { NavLink } from "react-router-dom";
 import routes from "routes.js";
+import Logo from "assets/logo.svg";
+import DarkLogo from "assets/darklogo.svg";
 export default function AuthNavbar(props) {
   const [open, setOpen] = React.useState(false);
   const handleDrawerToggle = () => {
@@ -79,10 +80,11 @@ export default function AuthNavbar(props) {
       alignItems="center"
       color={mainText}
     >
-      <CreativeTimLogo w="32px" h="32px" me="10px" />
-      <Text fontSize="sm" mt="3px">
-        {logoText}
-      </Text>
+      {!localStorage?.getItem("chakra-ui-color-mode") === "light" ? (
+        <img src={DarkLogo} w="32px" h="32px" me="10px" />
+      ) : (
+        <img src={Logo} w="32px" h="32px" me="10px" />
+      )}
     </Link>
   );
   var linksAuth = (

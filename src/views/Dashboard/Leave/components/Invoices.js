@@ -12,27 +12,29 @@ const Invoices = ({ title, data }) => {
 
   return (
     <Card
-      p='22px'
+      p="22px"
       my={{ sm: "24px", lg: "0px" }}
-      ms={{ sm: "0px", lg: "24px" }}>
+      ms={{ sm: "0px", lg: "24px" }}
+    >
       <CardHeader>
-        <Flex justify='space-between' align='center' mb='1rem' w='100%'>
-          <Text fontSize='lg' color={textColor} fontWeight='bold'>
+        <Flex justify="space-between" align="center" mb="1rem" w="100%">
+          <Text fontSize="lg" color={textColor} fontWeight="bold">
             {title}
           </Text>
           <Button
-            colorScheme='teal'
-            borderColor='teal.300'
-            color='teal.300'
-            variant='outline'
-            fontSize='xs'
-            p='8px 32px'>
+            colorScheme="orange"
+            borderColor="#F29727"
+            color="#F29727"
+            variant="outline"
+            fontSize="xs"
+            p="8px 32px"
+          >
             VIEW ALL
           </Button>
         </Flex>
       </CardHeader>
       <CardBody>
-        <Flex direction='column' w='100%'>
+        <Flex direction="column" w="100%">
           {data.map((row) => {
             return (
               <InvoicesRow

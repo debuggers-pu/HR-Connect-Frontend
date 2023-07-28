@@ -29,6 +29,7 @@ import SalesOverview from "./components/SalesOverview";
 import WorkWithTheRockets from "./components/WorkWithTheRockets";
 import useCurrentUser from "hooks/useCurrentUser";
 import { Redirect } from "react-router-dom";
+import Conversations from "../Profile/components/Conversations";
 
 export default function Dashboard() {
   const iconBoxInside = useColorModeValue("white", "white");
@@ -101,18 +102,20 @@ export default function Dashboard() {
           percentage={23}
           chart={<BarChart />}
         />
+        <Conversations title={"Conversations"} />
+      </Grid>
+      <Grid
+        templateColumns={{ sm: "1fr" }}
+        templateRows={{ sm: "1fr auto", md: "1fr", lg: "1fr" }}
+        gap="24px"
+      >
         <SalesOverview
           title={"Sales Overview"}
           percentage={5}
           chart={<LineChart />}
         />
-      </Grid>
-      <Grid
-        templateColumns={{ sm: "1fr", md: "1fr 1fr", lg: "2fr 1fr" }}
-        templateRows={{ sm: "1fr auto", md: "1fr", lg: "1fr" }}
-        gap="24px"
-      >
-        <Projects
+
+        {/* <Projects
           title={"Projects"}
           amount={30}
           captions={["Companies", "Members", "Budget", "Completion"]}
@@ -122,7 +125,7 @@ export default function Dashboard() {
           title={"Orders Overview"}
           amount={30}
           data={timelineData}
-        />
+        /> */}
       </Grid>
     </Flex>
   );

@@ -58,7 +58,7 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
 
               <Flex align="center" sx={{ marginTop: "24px" }}>
                 <Button
-                  colorScheme="teal"
+                  colorScheme="orange"
                   size="lg"
                   leftIcon={<BiDoorOpen size={30} />}
                   onClick={onOpen}
@@ -69,7 +69,7 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
             </Flex>
             <Spacer />
             <Flex
-              // bg="teal.300"
+              // bg="orange.300"
               align="center"
               justify="center"
               // borderRadius='15px'
