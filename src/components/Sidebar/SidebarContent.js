@@ -7,6 +7,7 @@ import {
   Link,
   Stack,
   Text,
+  useColorMode,
   useColorModeValue,
 } from "@chakra-ui/react";
 import IconBox from "components/Icons/IconBox";
@@ -32,6 +33,7 @@ const SidebarContent = ({ logoText, routes }) => {
   };
   const createLinks = (routes) => {
     // Chakra Color Mode
+
     const activeBg = useColorModeValue("white", "gray.700");
     const inactiveBg = useColorModeValue("white", "gray.700");
     const activeColor = useColorModeValue("gray.700", "white");
@@ -176,6 +178,7 @@ const SidebarContent = ({ logoText, routes }) => {
   };
 
   const links = <>{createLinks(routes)}</>;
+  const { colorMode } = useColorMode();
 
   return (
     <>
@@ -191,10 +194,10 @@ const SidebarContent = ({ logoText, routes }) => {
           alignItems="center"
           fontSize="11px"
         >
-          {!localStorage?.getItem("chakra-ui-color-mode") === "light" ? (
-            <img src={DarkLogo} w="32px" h="32px" me="10px" />
-          ) : (
+          {colorMode === "light" ? (
             <img src={Logo} w="32px" h="32px" me="10px" />
+          ) : (
+            <img src={DarkLogo} w="32px" h="32px" me="10px" />
           )}
         </Link>
         <Separator></Separator>

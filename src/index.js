@@ -30,7 +30,7 @@
 
 // const App = () => {
 //   const { isAuthenticated, user } = useCurrentUser();
-//   console.log(user);
+
 //   if (isAuthenticated) {
 //     return <DashbordRoutes />;
 //   } else {

@@ -15,7 +15,6 @@ const Events = () => {
   //     setEvents((prevEvents) => [...prevEvents, event]);
   //   };
 
-  console.log(events);
   const handleDateClick = (arg) => {
     const title = prompt("Event Title:");
     if (title) {

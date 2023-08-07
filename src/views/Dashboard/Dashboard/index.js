@@ -34,7 +34,6 @@ import Conversations from "../Profile/components/Conversations";
 export default function Dashboard() {
   const iconBoxInside = useColorModeValue("white", "white");
   const { isAuthenticated, loading } = useCurrentUser();
-  console.log(isAuthenticated);
 
   return (
     <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>

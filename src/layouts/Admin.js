@@ -18,6 +18,7 @@ import FixedPlugin from "../components/FixedPlugin/FixedPlugin";
 import MainPanel from "../components/Layout/MainPanel";
 import PanelContainer from "../components/Layout/PanelContainer";
 import PanelContent from "../components/Layout/PanelContent";
+import useCurrentUser from "hooks/useCurrentUser";
 export default function Dashboard(props) {
   const { ...rest } = props;
   // states and functions
@@ -95,6 +96,13 @@ export default function Dashboard(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   document.documentElement.dir = "ltr";
   // Chakra Color Mode
+
+  const { user, isAuthenticated, loading } = useCurrentUser();
+
+  if (loading) {
+    return <h1>LOADING,,,,.,.as,dsd,sa</h1>;
+  }
+
   return (
     <ChakraProvider theme={theme} resetCss={false}>
       <Sidebar
