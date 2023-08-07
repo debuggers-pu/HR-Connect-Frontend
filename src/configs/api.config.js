@@ -3,7 +3,7 @@ import { toast } from "react-hot-toast";
 
 const instance = axios.create({
   baseURL: `${process.env.REACT_APP_BACKEND_URL}`,
-  // baseURL: `https://dummyjson.com/auth/`,
+
   timeout: 50000,
 });
 
@@ -97,7 +97,6 @@ export const api = {
     } catch (error) {
       const message = handleError(error);
       toast.error(message || "Unable to complete your request");
-
       return { status: "failure", message: message };
     }
   },

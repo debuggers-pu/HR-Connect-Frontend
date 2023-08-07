@@ -43,7 +43,6 @@ var SideBarRoutes = [
   {
     path: "/profile",
     name: "Profile Settings",
-
     icon: <FaCog color="inherit" />,
     secondaryNavbar: true,
     component: Profile,
