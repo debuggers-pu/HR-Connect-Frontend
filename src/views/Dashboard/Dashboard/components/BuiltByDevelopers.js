@@ -52,6 +52,7 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
                 {description}
               </Text>
               <Spacer />
+
               <Text as="b" fontSize="lg" ml={2}>
                 Today is {dayOfWeek},{presentDate}
               </Text>
@@ -67,7 +68,7 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
                 </Button>
               </Flex>
             </Flex>
-            <Spacer />
+
             <Flex
               // bg="orange.300"
               align="center"

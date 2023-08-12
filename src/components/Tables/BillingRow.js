@@ -16,7 +16,7 @@ function BillingRow(props) {
   const { name, company, email, number } = props;
 
   return (
-    <Box p="24px" bg={bgColor} my="22px" borderRadius="12px">
+    <Box p="14px" bg={bgColor} my="16px" borderRadius="12px">
       <Flex justify="space-between" w="100%">
         <Flex direction="column" maxWidth="70%">
           <Text color={nameColor} fontSize="md" fontWeight="bold" mb="10px">

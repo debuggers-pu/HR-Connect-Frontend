@@ -8,7 +8,6 @@ import {
   FormLabel,
   Heading,
   Input,
-  Link,
   Switch,
   Text,
   useColorModeValue,
@@ -56,7 +55,6 @@ function SignIn() {
 
   return (
     <>
-      <Toaster position="top-center" reverseOrder={false} duration="3000" />
       <Flex position="relative" mb="40px">
         <Flex
           h={{ sm: "initial", md: "75vh", lg: "85vh" }}
