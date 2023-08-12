@@ -19,6 +19,7 @@ import MainPanel from "../components/Layout/MainPanel";
 import PanelContainer from "../components/Layout/PanelContainer";
 import PanelContent from "../components/Layout/PanelContent";
 import useCurrentUser from "hooks/useCurrentUser";
+import toast, { Toaster } from "react-hot-toast";
 export default function Dashboard(props) {
   const { ...rest } = props;
   // states and functions
@@ -105,6 +106,7 @@ export default function Dashboard(props) {
 
   return (
     <ChakraProvider theme={theme} resetCss={false}>
+      <Toaster position="top-center" reverseOrder={false} duration="3000" />
       <Sidebar
         routes={routes}
         logoText={"HR CONNECT"}
