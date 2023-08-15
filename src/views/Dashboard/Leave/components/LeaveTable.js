@@ -22,9 +22,9 @@ import {
   HamburgerIcon,
   ViewIcon,
 } from "@chakra-ui/icons";
+import { toast } from "react-hot-toast";
 import ViewLeaveDetail from "./ViewLeaveDetail";
 import { api } from "configs";
-import { toast } from "react-hot-toast";
 
 const LeaveTable = ({ leaveByUser, setLoading, loading }) => {
   const { dateFormat } = useDateTime();
@@ -122,9 +122,9 @@ const LeaveTable = ({ leaveByUser, setLoading, loading }) => {
                       {" "}
                       <Badge
                         variant="subtle"
-                        colorScheme="yellow"
-                        px={4}
-                        py={8}
+                        colorScheme="red"
+                        px={2}
+                        py={1}
                         borderRadius={8}
                       >
                         {leaves?.status}
@@ -135,8 +135,8 @@ const LeaveTable = ({ leaveByUser, setLoading, loading }) => {
                   <Td>
                     <Menu>
                       <MenuButton
-                        px={4}
-                        py={2}
+                        px={2}
+                        py={1}
                         transition="all 0.2s"
                         borderRadius="md"
                         _hover={{ bg: "gray.400" }}

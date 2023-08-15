@@ -10,11 +10,39 @@ import {
 import { FaCheck, FaTrashAlt } from "react-icons/fa";
 
 import useDateTime from "hooks/useDateTime";
+import { api } from "configs";
+import { toast } from "react-hot-toast";
 
-function BillingRow({ leaves }) {
+function BillingRow({ leaves, setLoading }) {
   const { dateFormat } = useDateTime();
   const bgColor = useColorModeValue("#F8F9FA", "gray.800");
   const nameColor = useColorModeValue("gray.500", "white");
+
+  const statusHandler = async (id, method) => {
+    setLoading(true);
+    try {
+      let data;
+      if (method == "delete") {
+        data = { status: "rejected" };
+      } else {
+        data = { status: "approved" };
+      }
+      const res = await api.patch(
+        `/hrConnect/api/admin/update-leave-status/${id}`,
+        data,
+        true
+      );
+      if (res?.status) {
+        toast.success(res?.data?.message);
+        console.log(res);
+        setLoading(false);
+      }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+    setLoading(false);
+  };
 
   return (
     <Box p="14px" bg={bgColor} my="16px" borderRadius="12px">
@@ -56,6 +84,7 @@ function BillingRow({ leaves }) {
             bg="transparent"
             mb={{ sm: "10px", md: "0px" }}
             me={{ md: "12px" }}
+            onClick={() => statusHandler(leaves._id, "delete")}
           >
             <Flex color="red.500" cursor="pointer" align="center" p="12px">
               <Icon as={FaTrashAlt} me="4px" />
@@ -64,7 +93,11 @@ function BillingRow({ leaves }) {
               </Text>
             </Flex>
           </Button>
-          <Button p="0px" bg="transparent">
+          <Button
+            p="0px"
+            bg="transparent"
+            onClick={() => statusHandler(leaves._id, "approve")}
+          >
             <Flex color={"green.500"} cursor="pointer" align="center" p="12px">
               <Icon as={FaCheck} me="4px" />
               <Text fontSize="sm" fontWeight="semibold">
