@@ -15,9 +15,13 @@ function Billing() {
   useEffect(() => {
     setLoading(true);
     const getLeaveList = async () => {
-      const data = await api.get("/hrConnect/api/leave/get-all-leaves", true);
-      setLeaveList(data?.leaves || "");
-      setLoading(false);
+      const res = await api.get("/hrConnect/api/leave/get-all-leaves", true);
+      if (res) {
+        console.log(res);
+        const result = res?.leaves.filter((data) => data.status == "pending");
+        setLeaveList(result || "");
+        setLoading(false);
+      }
     };
     getLeaveList();
     setLoading(false);
@@ -30,8 +34,10 @@ function Billing() {
         "/hrConnect/api/leave/get-leaves-by-user",
         true
       );
-      setLeaveByUser(res.leaves);
-      setLoading(false);
+      if (res) {
+        setLeaveByUser(res.leaves || "");
+        setLoading(false);
+      }
     };
     getUserLeaveList();
     setLoading(false);
@@ -47,7 +53,11 @@ function Billing() {
         loading={loading}
       />
       {user.userType == "admin" ? (
-        <BillingInformation title={"Leave Requests"} leaveList={leaveList} />
+        <BillingInformation
+          title={"Leave Requests"}
+          leaveList={leaveList}
+          setLoading={setLoading}
+        />
       ) : (
         ""
       )}

@@ -54,7 +54,7 @@ ReactDOM.render(
       <Route path={`/auth`} component={AuthLayout} />
       <Route path={`/admin`} component={AdminLayout} />
       <Route path={`/rtl`} component={RTLLayout} />
-      <Redirect from="/" to="/admin/dashboard" />
+      <Redirect from="/" to="/auth/signin" />
       <Route path="*" element={<PageNotFound />} />
     </Switch>
   </BrowserRouter>,

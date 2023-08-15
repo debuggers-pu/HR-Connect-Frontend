@@ -7,7 +7,7 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import BillingRow from "components/Tables/BillingRow";
 
-const BillingInformation = ({ title, leaveList }) => {
+const BillingInformation = ({ title, leaveList, setLoading }) => {
   const textColor = useColorModeValue("gray.700", "white");
 
   return (
@@ -21,7 +21,7 @@ const BillingInformation = ({ title, leaveList }) => {
         <CardBody>
           <Flex direction="column" w="100%">
             {leaveList?.map((leaves) => {
-              return <BillingRow leaves={leaves} />;
+              return <BillingRow leaves={leaves} setLoading={setLoading} />;
             })}
           </Flex>
         </CardBody>
