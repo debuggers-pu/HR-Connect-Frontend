@@ -5,29 +5,24 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import BillingRow from "components/Tables/BillingRow";
-import React from "react";
+import { api } from "configs";
+import React, { useEffect, useState } from "react";
 
-const BillingInformation = ({ title, data }) => {
+const BillingInformation = ({ title, leaveList }) => {
   const textColor = useColorModeValue("gray.700", "white");
+
   return (
     <Card my={{ lg: "24px" }} me={{ lg: "24px" }}>
-      <Flex direction='column'>
-        <CardHeader py='12px'>
-          <Text color={textColor} fontSize='lg' fontWeight='bold'>
+      <Flex direction="column">
+        <CardHeader py="12px">
+          <Text color={textColor} fontSize="lg" fontWeight="bold">
             {title}
           </Text>
         </CardHeader>
         <CardBody>
-          <Flex direction='column' w='100%'>
-            {data.map((row) => {
-              return (
-                <BillingRow
-                  name={row.name}
-                  company={row.company}
-                  email={row.email}
-                  number={row.number}
-                />
-              );
+          <Flex direction="column" w="100%">
+            {leaveList?.map((leaves) => {
+              return <BillingRow leaves={leaves} />;
             })}
           </Flex>
         </CardBody>

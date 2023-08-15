@@ -1,3 +1,4 @@
+import { formatDate } from "@fullcalendar/core";
 import React from "react";
 
 const useDateTime = () => {
@@ -15,7 +16,15 @@ const useDateTime = () => {
   const twelveHourFormat = hours % 12 || 12;
   const time = ` ${twelveHourFormat}:${currentDate.getMinutes()}`;
 
-  return { presentDate, time, amOrPm, dayOfWeek };
+  const dateFormat = (data) => {
+    return formatDate(data, {
+      month: "long",
+      year: "numeric",
+      day: "numeric",
+    });
+  };
+
+  return { presentDate, time, amOrPm, dayOfWeek, dateFormat };
 };
 
 export default useDateTime;

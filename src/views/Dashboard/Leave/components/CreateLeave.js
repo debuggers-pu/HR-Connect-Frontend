@@ -21,7 +21,7 @@ import useDateTime from "hooks/useDateTime";
 import { api } from "configs";
 import toast from "react-hot-toast";
 
-export default function DrawerExample() {
+export default function CreateLeave() {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
