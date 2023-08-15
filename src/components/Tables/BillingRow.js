@@ -9,36 +9,40 @@ import {
 } from "@chakra-ui/react";
 import { FaCheck, FaTrashAlt } from "react-icons/fa";
 
-function BillingRow(props) {
-  const textColor = useColorModeValue("gray.700", "white");
+import useDateTime from "hooks/useDateTime";
+
+function BillingRow({ leaves }) {
+  const { dateFormat } = useDateTime();
   const bgColor = useColorModeValue("#F8F9FA", "gray.800");
   const nameColor = useColorModeValue("gray.500", "white");
-  const { name, company, email, number } = props;
 
   return (
     <Box p="14px" bg={bgColor} my="16px" borderRadius="12px">
       <Flex justify="space-between" w="100%">
         <Flex direction="column" maxWidth="70%">
           <Text color={nameColor} fontSize="md" fontWeight="bold" mb="10px">
-            Employee Name: {name}
+            Employee Name: {leaves.employeeName}
           </Text>
           <Text color="gray.400" fontSize="sm" fontWeight="semibold">
             Leave Type:{" "}
             <Text as="span" color="gray.500">
-              {company}
+              {leaves.leaveType}
             </Text>
           </Text>
           <Text color="gray.400" fontSize="sm" fontWeight="semibold">
             Leave Date :{" "}
             <Text as="span" color="gray.500">
-              {email} from yeti to uti
+              From{" "}
+              <span style={{ textDecoration: "italic" }}>
+                {dateFormat(leaves?.endDate)}
+              </span>{" "}
+              to <span>{dateFormat(leaves?.endDate)}</span>{" "}
             </Text>
           </Text>
           <Text color="gray.400" fontSize="sm" fontWeight="semibold">
             Reason:{" "}
             <Text as="span" color="gray.500">
-              {number}
-              fdssadsfadfsdsdfdasfdfsfdfssddfsdddasddassfsfadsfasdssdsfsadsfdfssd
+              {leaves.reason}
             </Text>
           </Text>
         </Flex>

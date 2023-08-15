@@ -39,8 +39,9 @@ function SignIn() {
       localStorage.setItem("token", res?.data?.token);
       localStorage.setItem("userId", res?.data?.user._id);
       history.push("/admin/dashboard");
+    } else {
+      toast.error("Unable To Login 😵😵😵");
     }
-    toast.error("Unable To Login 😵😵😵");
   };
 
   const { isAuthenticated, loading } = useCurrentUser();

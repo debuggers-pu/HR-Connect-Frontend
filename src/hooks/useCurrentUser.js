@@ -26,7 +26,6 @@ const useCurrentUser = () => {
   const userLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
-
     history.push("/auth/signin");
   };
 
