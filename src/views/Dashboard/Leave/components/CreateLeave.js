@@ -21,7 +21,7 @@ import useDateTime from "hooks/useDateTime";
 import { api } from "configs";
 import toast from "react-hot-toast";
 
-export default function CreateLeave() {
+export default function CreateLeave({ setLoading, loading }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
@@ -33,12 +33,16 @@ export default function CreateLeave() {
   } = useForm();
 
   const onSubmit = async (data) => {
+    setLoading(true);
     const res = await api.post("/hrConnect/api/leave/create-leave", data, true);
     if (res.status == "success") {
       toast.success("Succesfully requested for Leave");
+      setLoading(false);
     } else {
       toast.error("Leave Request Failed");
+      setLoading(false);
     }
+    setLoading(false);
   };
   const { presentDate } = useDateTime();
   const [startDate, setStartDate] = useState();

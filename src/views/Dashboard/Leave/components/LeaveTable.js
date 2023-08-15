@@ -10,18 +10,28 @@ import {
   Tr,
   Badge,
   useDisclosure,
+  Menu,
+  MenuButton,
+  MenuList,
+  MenuItem,
 } from "@chakra-ui/react";
 import useDateTime from "hooks/useDateTime";
-import { ViewIcon } from "@chakra-ui/icons";
+import {
+  DeleteIcon,
+  EditIcon,
+  HamburgerIcon,
+  ViewIcon,
+} from "@chakra-ui/icons";
 import ViewLeaveDetail from "./ViewLeaveDetail";
 import { api } from "configs";
+import { toast } from "react-hot-toast";
 
-const LeaveTable = ({ leaveList }) => {
+const LeaveTable = ({ leaveByUser, setLoading, loading }) => {
   const { dateFormat } = useDateTime();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [leaveId, setLeaveId] = useState();
   const [data, setData] = useState();
-  const [loading, setLoading] = useState(false);
+
   const viewLeaveHandler = async () => {
     if (leaveId) {
       setLoading(true);
@@ -31,6 +41,27 @@ const LeaveTable = ({ leaveList }) => {
       );
       if (res.leave) {
         setData(res.leave);
+      }
+      setLoading(false);
+    }
+  };
+
+  const deleteLeaveHandler = async (id, status) => {
+    setLoading(true);
+    if (id && status == "pending") {
+      setLoading(true);
+      const res = await api.delete(
+        `/hrConnect/api/leave/delete-leave/${id}`,
+        true
+      );
+      if (res.status == "success") {
+        toast.success(
+          `${res?.leave?.employeeName} having ${res?.leave?.leaveType} from ${res?.leave?.startDate} to ${res?.leave?.endDate} has been deleted succefully `
+        );
+        setLoading(false);
+      } else {
+        toast.error("Failed to delete leave");
+        setLoading(false);
       }
       setLoading(false);
     }
@@ -50,7 +81,7 @@ const LeaveTable = ({ leaveList }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {leaveList?.map((leaves) => {
+            {leaveByUser?.map((leaves) => {
               return (
                 <Tr>
                   <Td>
@@ -92,8 +123,8 @@ const LeaveTable = ({ leaveList }) => {
                       <Badge
                         variant="subtle"
                         colorScheme="yellow"
-                        px={2}
-                        py={1}
+                        px={4}
+                        py={8}
                         borderRadius={8}
                       >
                         {leaves?.status}
@@ -101,19 +132,43 @@ const LeaveTable = ({ leaveList }) => {
                     </Td>
                   )}
                   <Td>{leaves?.leaveType}</Td>
-
                   <Td>
-                    {loading ? (
-                      <ViewIcon _disabled={true} />
-                    ) : (
-                      <ViewIcon
-                        onClick={() => {
-                          onOpen();
-                          setLeaveId(leaves?._id);
-                          viewLeaveHandler();
-                        }}
-                      />
-                    )}
+                    <Menu>
+                      <MenuButton
+                        px={4}
+                        py={2}
+                        transition="all 0.2s"
+                        borderRadius="md"
+                        _hover={{ bg: "gray.400" }}
+                        _expanded={{ bg: "orange.300" }}
+                        _focus={{ boxShadow: "outline" }}
+                      >
+                        <HamburgerIcon />
+                      </MenuButton>
+                      <MenuList>
+                        <MenuItem
+                          onClick={() => {
+                            onOpen();
+                            setLeaveId(leaves?._id);
+                            viewLeaveHandler();
+                          }}
+                        >
+                          <ViewIcon mr={4} />
+                          View
+                        </MenuItem>
+                        <MenuItem>
+                          <EditIcon mr={4} /> Edit
+                        </MenuItem>
+                        <MenuItem
+                          onClick={() =>
+                            deleteLeaveHandler(leaves?._id, leaves?.status)
+                          }
+                        >
+                          {" "}
+                          <DeleteIcon mr={4} /> Delete
+                        </MenuItem>
+                      </MenuList>
+                    </Menu>
                   </Td>
                 </Tr>
               );
