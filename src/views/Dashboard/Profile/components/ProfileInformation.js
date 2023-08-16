@@ -1,40 +1,106 @@
 import { React, useState } from "react";
 import {
   Button,
-  Flex,
   Grid,
   GridItem,
   Input,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-// Custom components
+import toast, { Toaster } from "react-hot-toast";
 import Card from "components/Card/Card";
 import CardBody from "components/Card/CardBody";
 import CardHeader from "components/Card/CardHeader";
 import useCurrentUser from "hooks/useCurrentUser";
 import { api } from "configs";
-import toast, { Toaster } from "react-hot-toast";
 
 const ProfileInformation = () => {
-  const { user, isAuthenticated, loading } = useCurrentUser();
+  const {
+    user,
+    isAuthenticated,
+    loading,
+    setLoading,
+    userLogout,
+  } = useCurrentUser();
   const [fullName, setFullName] = useState();
   const [username, setUsername] = useState();
+  const [currentPass, setCurrentPass] = useState();
+  const [newPass, setNewPass] = useState();
 
   const handleUpdate = async () => {
-    if (fullName || username) {
-      const formData = new FormData();
-      formData.append("fullName", fullName);
-      formData.append("username", username);
-      const res = await api.patch(
-        "/hrConnect/api/user/update-user",
-        formData,
-        true
-      );
+    try {
+      let res;
+      setLoading(true);
+      if (fullName || username) {
+        const formData = new FormData();
+        if (fullName && !username) {
+          formData.append("fullName", fullName);
+          res = await api.patch(
+            "/hrConnect/api/user/update-user",
+            formData,
+            true
+          );
+        }
+        if (!fullName && username) {
+          formData.append("username", username);
+          res = await api.patch(
+            "/hrConnect/api/user/update-user",
+            formData,
+            true
+          );
+        }
+        if (fullName && username) {
+          formData.append("fullName", fullName);
+          formData.append("username", username);
+          res = await api.patch(
+            "/hrConnect/api/user/update-user",
+            formData,
+            true
+          );
+        }
 
-      if (res.status == "success") {
-        toast.success("Successfully Updated!");
+        if (res.status == "success") {
+          toast.success("Successfully Updated!");
+          setLoading(false);
+        } else {
+          toast.error("Unable to Update the Profile");
+          setLoading(false);
+        }
       }
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
+
+  const passwordChangeHandler = async () => {
+    try {
+      if (currentPass && newPass) {
+        const formData = new FormData();
+        formData.append("oldPassword", currentPass);
+        formData.append("newPassword", newPass);
+        const res = await api.patch(
+          `hrConnect/api/user/change-password/${user?._id}`,
+          formData,
+          true
+        );
+
+        if (res.status === "success") {
+          toast.success("Successfully Updated Password");
+          setCurrentPass();
+          setNewPass();
+          toast.success("Logging out");
+          setTimeout(() => {
+            userLogout();
+          }, 3000);
+        } else {
+          setCurrentPass();
+          setNewPass();
+          toast.error("Unable to Change Password");
+        }
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -110,23 +176,6 @@ const ProfileInformation = () => {
               </Text>
               <Input placeholder="Full Name" value={Date(user.createdAt)} />
             </GridItem>
-
-            {/* <Col className="mt-2" sm="12">
-            {isSubmitted ? (
-              <Button className="me-1" color="primary">
-                Saving...
-                <Spinner size="sm" />
-              </Button>
-            ) : (
-              <Button className="me-1" color="primary">
-                Save changes
-              </Button>
-            )}
-
-            <Button color="secondary" outline>
-              Discard
-            </Button>
-          </Col> */}
           </Grid>
         </CardBody>
         <CardBody>
@@ -166,10 +215,9 @@ const ProfileInformation = () => {
                 Old Password
               </Text>
               <Input
-                placeholder="User@Name"
+                placeholder="Current Password"
                 type="password"
-                defaultValue={user.username}
-                onChange={(e) => setUsername(e.target.value)}
+                onChange={(e) => setCurrentPass(e.target.value)}
               />
             </GridItem>{" "}
             <GridItem>
@@ -177,16 +225,16 @@ const ProfileInformation = () => {
                 New Password
               </Text>
               <Input
-                placeholder="User@Name"
+                placeholder="New Password"
                 type="password"
-                defaultValue={user.username}
-                onChange={(e) => setUsername(e.target.value)}
+                disabled={currentPass ? false : true}
+                onChange={(e) => setNewPass(e.target.value)}
               />
             </GridItem>
           </Grid>
         </CardBody>
         <CardBody mt={6}>
-          <Button colorScheme="orange" onClick={handleUpdate}>
+          <Button colorScheme="orange" onClick={passwordChangeHandler}>
             Save Changes
           </Button>
         </CardBody>

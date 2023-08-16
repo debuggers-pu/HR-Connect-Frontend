@@ -14,6 +14,7 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import useDateTime from "hooks/useDateTime";
 import {
@@ -26,7 +27,8 @@ import { toast } from "react-hot-toast";
 import ViewLeaveDetail from "./ViewLeaveDetail";
 import { api } from "configs";
 
-const LeaveTable = ({ leaveByUser, setLoading, loading }) => {
+const LeaveTable = ({ leaveByUser, setLoading }) => {
+  const textColor = useColorModeValue("gray.700", "white");
   const { dateFormat } = useDateTime();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [leaveId, setLeaveId] = useState();
@@ -69,7 +71,7 @@ const LeaveTable = ({ leaveByUser, setLoading, loading }) => {
 
   return (
     <>
-      <TableContainer bg={"white"}>
+      <TableContainer variant="simple" color={textColor}>
         <Table size="md" variant="simple">
           <Thead>
             <Tr>

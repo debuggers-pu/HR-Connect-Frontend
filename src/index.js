@@ -40,9 +40,7 @@
 
 import React from "react";
 import ReactDOM from "react-dom";
-
 import { Redirect, BrowserRouter, Route, Switch } from "react-router-dom";
-
 import AuthLayout from "layouts/Auth.js";
 import AdminLayout from "layouts/Admin.js";
 import RTLLayout from "layouts/RTL.js";
