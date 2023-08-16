@@ -3,7 +3,7 @@ import { mode } from "@chakra-ui/theme-tools";
 export const globalStyles = {
   colors: {
     gray: {
-      700: "#1C1850",
+      700: "#1f2733",
     },
   },
   styles: {

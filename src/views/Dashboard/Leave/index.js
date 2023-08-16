@@ -17,7 +17,6 @@ function Billing() {
     const getLeaveList = async () => {
       const res = await api.get("/hrConnect/api/leave/get-all-leaves", true);
       if (res) {
-        console.log(res);
         const result = res?.leaves.filter((data) => data.status == "pending");
         setLeaveList(result || "");
         setLoading(false);

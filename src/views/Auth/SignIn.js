@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// Chakra imports
+
 import {
   Box,
   Flex,
@@ -12,11 +12,10 @@ import {
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
-// Assets
 import { Redirect, useHistory } from "react-router-dom";
+import toast from "react-hot-toast";
 import { api } from "configs";
 import useCurrentUser from "hooks/useCurrentUser";
-import toast, { Toaster } from "react-hot-toast";
 import signInImage from "assets/img/signInImage.jpeg";
 
 function SignIn() {
@@ -51,6 +50,7 @@ function SignIn() {
   }
 
   if (isAuthenticated) {
+    console.log(isAuthenticated);
     return <Redirect to="/admin/dashboard" />;
   }
 

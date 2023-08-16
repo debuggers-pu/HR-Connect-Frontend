@@ -6,7 +6,6 @@ const { useState, useEffect } = require("react");
 const useCurrentUser = () => {
   let history = useHistory();
   const [user, setUser] = useState({});
-
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -14,7 +13,8 @@ const useCurrentUser = () => {
     const fetchUser = async () => {
       setLoading(true);
       const res = await api.get("/hrConnect/api/user/get-user-by-id", true);
-      if (res) {
+
+      if (res.status != "failure") {
         setIsAuthenticated(true);
         setUser(res?.user);
       }
@@ -26,6 +26,7 @@ const useCurrentUser = () => {
   const userLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userId");
+    setIsAuthenticated(false);
     history.push("/auth/signin");
   };
 
@@ -33,6 +34,7 @@ const useCurrentUser = () => {
     user,
     isAuthenticated,
     loading,
+    setLoading,
     userLogout,
   };
 };

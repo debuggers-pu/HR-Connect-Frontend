@@ -17,9 +17,9 @@ import {
   Select,
 } from "@chakra-ui/react";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 import useDateTime from "hooks/useDateTime";
 import { api } from "configs";
-import toast from "react-hot-toast";
 
 export default function CreateLeave({ setLoading, loading }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -38,6 +38,7 @@ export default function CreateLeave({ setLoading, loading }) {
     if (res.status == "success") {
       toast.success("Succesfully requested for Leave");
       setLoading(false);
+      reset();
     } else {
       toast.error("Leave Request Failed");
       setLoading(false);
