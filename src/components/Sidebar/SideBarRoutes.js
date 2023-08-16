@@ -7,7 +7,8 @@ import Profile from "views/Dashboard/Profile";
 import { HomeIcon, StatsIcon, CreditIcon } from "components/Icons/Icons";
 import Events from "views/Dashboard/Events";
 
-import { FaCalendarCheck, FaCog } from "react-icons/fa";
+import { FaCalendarCheck, FaCog, FaUser } from "react-icons/fa";
+import EmployeeManagement from "views/Dashboard/Employee Management";
 
 var SideBarRoutes = [
   {
@@ -38,6 +39,13 @@ var SideBarRoutes = [
 
     icon: <FaCalendarCheck color="inherit" />,
     component: Events,
+    layout: "/admin",
+  },
+  {
+    path: "/employeeManagement",
+    name: "Employee Management",
+    icon: <FaUser color="inherit" />,
+    component: EmployeeManagement,
     layout: "/admin",
   },
   {
