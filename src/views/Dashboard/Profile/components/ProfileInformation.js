@@ -104,7 +104,6 @@ const ProfileInformation = () => {
     }
   };
 
-  // Chakra color mode
   const textColor = useColorModeValue("gray.700", "white");
   return (
     <>

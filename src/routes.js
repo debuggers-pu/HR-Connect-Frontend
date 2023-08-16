@@ -15,7 +15,8 @@ import {
   DocumentIcon,
   RocketIcon,
 } from "components/Icons/Icons";
-import { FaCalendarCheck, FaCog } from "react-icons/fa";
+import { FaCalendarCheck, FaCog, FaUser } from "react-icons/fa";
+import EmployeeManagement from "views/Dashboard/Employee Management";
 
 var dashRoutes = [
   {
@@ -48,6 +49,13 @@ var dashRoutes = [
     rtlName: "لوحة القيادة",
     icon: <FaCalendarCheck color="inherit" />,
     component: Events,
+    layout: "/admin",
+  },
+  {
+    path: "/employeeManagement",
+    name: "Employee Management",
+    icon: <FaUser color="inherit" />,
+    component: EmployeeManagement,
     layout: "/admin",
   },
 
