@@ -39,8 +39,6 @@ const EmployeeManagement = () => {
     getAllUsers();
   }, [search]);
 
-  console.log(allUsers);
-
   if (user?.userType !== "admin") {
     return <NotAuthorized />;
   }

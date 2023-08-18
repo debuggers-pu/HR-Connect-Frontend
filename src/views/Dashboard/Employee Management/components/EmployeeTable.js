@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Menu,
   MenuButton,
@@ -23,25 +23,30 @@ import {
   ViewIcon,
 } from "@chakra-ui/icons";
 import ViewEmployeeDetail from "./ViewEmployeeDetail";
+import { api } from "configs";
 
 const EmployeeTable = ({ usersList }) => {
   const textColor = useColorModeValue("gray.700", "white");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { dateFormat } = useDateTime();
+  const [userData, setUserData] = useState();
 
-  const viewLeaveHandler = async (id) => {
-    // if (leaveId) {
-    //   setLoading(true);
-    //   const res = await api.get(
-    //     `/hrConnect/api/user/get-user-by-id/${leaveId}`,
-    //     true
-    //   );
-    //   if (res.leave) {
-    //     setData(res.leave);
-    //   }
-    //   setLoading(false);
-    // }
+  const viewEmployeeHandler = async (id) => {
+    try {
+      if (id) {
+        const res = await api.get(
+          `/hrConnect/api/user/getUserById/${id}`,
+          true
+        );
+        if (res.message == "User found") {
+          setUserData(res.user);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
+
   return (
     <>
       <TableContainer variant="simple" color={textColor}>
@@ -83,8 +88,7 @@ const EmployeeTable = ({ usersList }) => {
                             <MenuItem
                               onClick={() => {
                                 onOpen();
-                                //   setLeaveId(leaves?._id);
-                                viewLeaveHandler(user?._id);
+                                viewEmployeeHandler(user?._id);
                               }}
                             >
                               <ViewIcon mr={4} />
@@ -121,7 +125,7 @@ const EmployeeTable = ({ usersList }) => {
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}
-        data={usersList}
+        data={userData}
       />
     </>
   );
