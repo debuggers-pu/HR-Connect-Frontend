@@ -34,7 +34,7 @@ function BillingRow({ leaves, setLoading }) {
       );
       if (res?.status) {
         toast.success(res?.data?.message);
-        console.log(res);
+
         setLoading(false);
       }
     } catch (error) {
