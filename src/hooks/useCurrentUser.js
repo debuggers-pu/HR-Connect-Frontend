@@ -8,6 +8,7 @@ const useCurrentUser = () => {
   const [user, setUser] = useState({});
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [LeaveNotifications, setLeaveNotifications] = useState([]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -21,7 +22,24 @@ const useCurrentUser = () => {
     };
     fetchUser();
     setLoading(false);
-  }, []);
+  }, [loading]);
+
+  useEffect(() => {
+    const fetchNotification = async () => {
+      setLoading(true);
+      const res = await api.get(
+        "/hrConnect/api/admin/get-leave-notifications-for-user",
+        true
+      );
+
+      if (res?.notifications?.length) {
+        setLeaveNotifications(res?.notifications);
+      }
+    };
+    fetchNotification();
+
+    setLoading(false);
+  }, [loading]);
 
   const userLogout = () => {
     localStorage.removeItem("token");
@@ -36,6 +54,7 @@ const useCurrentUser = () => {
     loading,
     setLoading,
     userLogout,
+    LeaveNotifications,
   };
 };
 
