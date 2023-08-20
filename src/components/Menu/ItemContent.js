@@ -22,6 +22,7 @@ export function ItemContent(props) {
             {props.boldInfo}
             {spacing}
           </Text>
+          <br />
           {props.info}
         </Text>
         <Flex alignItems="center">

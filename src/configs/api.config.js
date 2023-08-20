@@ -50,7 +50,6 @@ export const api = {
       };
 
       const response = await instance.get(url, config);
-
       return response.data;
     } catch (error) {
       const message = handleError(error);

@@ -62,51 +62,23 @@ const EmployeeTable = ({ usersList }) => {
             </Tr>
           </Thead>
           {usersList?.length > 0
-            ? usersList.map((user) => {
+            ? usersList.map((user, index) => {
                 return (
                   <Tbody>
-                    <Tr>
+                    <Tr key={index}>
                       <Td>{user?.fullName}</Td>
                       <Td>{user?.username}</Td>
                       <Td>{user?.email}</Td>
                       <Td>{user?.userType}</Td>
                       <Td>{dateFormat(user?.createdAt)}</Td>
                       <Td>
-                        <Menu>
-                          <MenuButton
-                            px={2}
-                            py={1}
-                            transition="all 0.2s"
-                            borderRadius="md"
-                            _hover={{ bg: "gray.400" }}
-                            _expanded={{ bg: "orange.300" }}
-                            _focus={{ boxShadow: "outline" }}
-                          >
-                            <HamburgerIcon />
-                          </MenuButton>
-                          <MenuList>
-                            <MenuItem
-                              onClick={() => {
-                                onOpen();
-                                viewEmployeeHandler(user?._id);
-                              }}
-                            >
-                              <ViewIcon mr={4} />
-                              View
-                            </MenuItem>
-                            <MenuItem>
-                              <EditIcon mr={4} /> Edit
-                            </MenuItem>
-                            <MenuItem
-                            // onClick={() =>
-                            //   deleteLeaveHandler(leaves?._id, leaves?.status)
-                            // }
-                            >
-                              {" "}
-                              <DeleteIcon mr={4} /> Delete
-                            </MenuItem>
-                          </MenuList>
-                        </Menu>
+                        <ViewIcon
+                          mr={4}
+                          onClick={() => {
+                            onOpen();
+                            viewEmployeeHandler(user?._id);
+                          }}
+                        />
                       </Td>
                     </Tr>
                   </Tbody>
@@ -125,7 +97,7 @@ const EmployeeTable = ({ usersList }) => {
         isOpen={isOpen}
         onOpen={onOpen}
         onClose={onClose}
-        data={userData}
+        user={userData}
       />
     </>
   );

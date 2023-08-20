@@ -43,7 +43,7 @@ export default function HeaderLinks(props) {
     mainText = "white";
   }
   const settingsRef = React.useRef();
-  const { userLogout } = useCurrentUser();
+  const { userLogout, LeaveNotifications } = useCurrentUser();
   return (
     <Flex
       pe={{ sm: "0px", md: "16px" }}
@@ -57,33 +57,21 @@ export default function HeaderLinks(props) {
         </MenuButton>
         <MenuList p="16px 8px">
           <Flex flexDirection="column">
-            <MenuItem borderRadius="8px" mb="10px">
-              <ItemContent
-                time="13 minutes ago"
-                info="from Alicia"
-                boldInfo="New Message"
-                aName="Alicia"
-                aSrc={avatar1}
-              />
-            </MenuItem>
-            <MenuItem borderRadius="8px" mb="10px">
-              <ItemContent
-                time="2 days ago"
-                info="by Josh Henry"
-                boldInfo="New Album"
-                aName="Josh Henry"
-                aSrc={avatar2}
-              />
-            </MenuItem>
-            <MenuItem borderRadius="8px">
-              <ItemContent
-                time="3 days ago"
-                info="Payment succesfully completed!"
-                boldInfo=""
-                aName="Kara"
-                aSrc={avatar3}
-              />
-            </MenuItem>
+            {LeaveNotifications.length
+              ? LeaveNotifications.map((notification, id) => {
+                  return (
+                    <MenuItem borderRadius="8px" mb="10px">
+                      <ItemContent
+                        time="13 minutes ago"
+                        info={notification?.message}
+                        boldInfo={notification?.title}
+                        aName="Alicia"
+                        aSrc={avatar1}
+                      />
+                    </MenuItem>
+                  );
+                })
+              : "NO Notification"}
           </Flex>
         </MenuList>
       </Menu>
