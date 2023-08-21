@@ -28,7 +28,7 @@ const useCurrentUser = () => {
     const fetchNotification = async () => {
       setLoading(true);
       const res = await api.get(
-        "/hrConnect/api/admin/get-leave-notifications-for-user",
+        "/hrConnect/api/leave/get-leave-notifications",
         true
       );
 
