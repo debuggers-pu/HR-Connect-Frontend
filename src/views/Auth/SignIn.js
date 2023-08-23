@@ -26,8 +26,10 @@ function SignIn() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState("");
 
   const handleSignIn = async () => {
+    setLoading(true);
     const res = await api.post("/hrConnect/api/user/login", {
       email,
       password,
@@ -37,20 +39,19 @@ function SignIn() {
       toast.success("Successfully Logged In!");
       localStorage.setItem("token", res?.data?.token);
       localStorage.setItem("userId", res?.data?.user._id);
+
       history.push("/admin/dashboard");
+      setLoading(false);
     } else {
       toast.error("Unable To Login 😵😵😵");
+      setLoading(false);
     }
+    setLoading(false);
   };
 
-  const { isAuthenticated, loading } = useCurrentUser();
-
-  if (loading) {
-    return <h1>Loadinng,,,,.,.as,dsd,sa</h1>;
-  }
+  const { isAuthenticated } = useCurrentUser();
 
   if (isAuthenticated) {
-    console.log(isAuthenticated);
     return <Redirect to="/admin/dashboard" />;
   }
 
@@ -134,26 +135,47 @@ function SignIn() {
                     Remember me
                   </FormLabel>
                 </FormControl>
-                <Button
-                  fontSize="16px"
-                  type="submit"
-                  bg="#F29727"
-                  w="100%"
-                  h="45"
-                  mb="20px"
-                  color="white"
-                  mt="20px"
-                  _hover={{
-                    bg: "orange.400",
-                  }}
-                  _active={{
-                    bg: "orange.500",
-                  }}
-                  onClick={handleSignIn}
-                >
-                  SIGN IN
-                </Button>
+
+                {loading ? (
+                  <Button
+                    bg="#F29727"
+                    w="100%"
+                    h="45"
+                    mb="20px"
+                    color="white"
+                    mt="20px"
+                    fontSize="16px"
+                    isLoading
+                    loadingText="Loading"
+                    colorScheme="teal"
+                    variant="outline"
+                    spinnerPlacement="start"
+                  >
+                    Submit
+                  </Button>
+                ) : (
+                  <Button
+                    fontSize="16px"
+                    type="submit"
+                    bg="#F29727"
+                    w="100%"
+                    h="45"
+                    mb="20px"
+                    color="white"
+                    mt="20px"
+                    _hover={{
+                      bg: "orange.400",
+                    }}
+                    _active={{
+                      bg: "orange.500",
+                    }}
+                    onClick={handleSignIn}
+                  >
+                    SIGN IN
+                  </Button>
+                )}
               </FormControl>
+
               {/* <Flex
               flexDirection="column"
               justifyContent="center"

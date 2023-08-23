@@ -1,7 +1,6 @@
 // Chakra imports
 import React from "react";
-import { Redirect } from "react-router-dom";
-import { Flex, Grid, useColorModeValue } from "@chakra-ui/react";
+import { Flex, Grid, Spinner, useColorModeValue } from "@chakra-ui/react";
 import avatar4 from "assets/img/avatars/avatar4.png";
 import ProfileBgImage from "assets/img/ProfileBackground.png";
 
@@ -18,7 +17,23 @@ function Profile() {
   const { user, isAuthenticated, loading } = useCurrentUser();
 
   if (loading) {
-    return <h1>LOADING,,,,.,.as,dsd,sa</h1>;
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignContent: "center",
+        }}
+      >
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </div>
+    );
   }
 
   // if (!isAuthenticated) {
