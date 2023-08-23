@@ -15,17 +15,12 @@ import useCurrentUser from "hooks/useCurrentUser";
 import { api } from "configs";
 
 const ProfileInformation = () => {
-  const {
-    user,
-    isAuthenticated,
-    loading,
-    setLoading,
-    userLogout,
-  } = useCurrentUser();
+  const { user, isAuthenticated, userLogout } = useCurrentUser();
   const [fullName, setFullName] = useState();
   const [username, setUsername] = useState();
   const [currentPass, setCurrentPass] = useState();
   const [newPass, setNewPass] = useState();
+  const [loading, setLoading] = useState();
 
   const handleUpdate = async () => {
     try {
@@ -180,21 +175,39 @@ const ProfileInformation = () => {
         <CardBody>
           <Grid mt={6}>
             <GridItem gap={4}>
-              <Button
-                bg="#1C1850"
-                _hover={{ bg: "#1C1850" }}
-                color={"white"}
-                _active={{
-                  bg: "orange",
-                  transform: "scale(0.98)",
-                }}
-                mx={4}
-              >
-                Reset
-              </Button>
-              <Button colorScheme="orange" onClick={handleUpdate}>
-                Save Changes
-              </Button>
+              {loading ? (
+                <Button disabled mx={4}>
+                  Reset
+                </Button>
+              ) : (
+                <Button
+                  bg="#1C1850"
+                  _hover={{ bg: "#1C1850" }}
+                  color={"white"}
+                  _active={{
+                    bg: "orange",
+                    transform: "scale(0.98)",
+                  }}
+                  mx={4}
+                >
+                  Reset
+                </Button>
+              )}
+
+              {loading ? (
+                <Button
+                  isLoading
+                  loadingText="Loading"
+                  colorScheme="orange"
+                  spinnerPlacement="start"
+                >
+                  Submit
+                </Button>
+              ) : (
+                <Button colorScheme="orange" onClick={handleUpdate}>
+                  Save Changes
+                </Button>
+              )}
             </GridItem>
           </Grid>
         </CardBody>
@@ -233,9 +246,20 @@ const ProfileInformation = () => {
           </Grid>
         </CardBody>
         <CardBody mt={6}>
-          <Button colorScheme="orange" onClick={passwordChangeHandler}>
-            Save Changes
-          </Button>
+          {loading ? (
+            <Button
+              isLoading
+              loadingText="Loading"
+              colorScheme="orange"
+              spinnerPlacement="start"
+            >
+              Submit
+            </Button>
+          ) : (
+            <Button colorScheme="orange" onClick={passwordChangeHandler}>
+              Save Changes
+            </Button>
+          )}
         </CardBody>
       </Card>
     </>

@@ -115,15 +115,6 @@ const Header = ({
               Reset
             </Button>
             <Button colorScheme="orange">Update Picture</Button>
-            <Button
-              isLoading
-              loadingText="Loading"
-              colorScheme="teal"
-              variant="outline"
-              spinnerPlacement="start"
-            >
-              Submit
-            </Button>
           </Flex>
         </Flex>
       </Box>
