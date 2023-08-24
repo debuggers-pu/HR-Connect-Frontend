@@ -25,6 +25,7 @@ function Billing() {
           title={"Leave Requests"}
           leaveList={leaveList}
           setLoading={setLoading}
+          loading={loading}
         />
       ) : (
         ""

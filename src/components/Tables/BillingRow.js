@@ -13,7 +13,7 @@ import useDateTime from "hooks/useDateTime";
 import { api } from "configs";
 import { toast } from "react-hot-toast";
 
-function BillingRow({ leaves, setLoading }) {
+function BillingRow({ leaves, setLoading, loading }) {
   const { dateFormat } = useDateTime();
   const bgColor = useColorModeValue("#F8F9FA", "gray.800");
   const nameColor = useColorModeValue("gray.500", "white");
