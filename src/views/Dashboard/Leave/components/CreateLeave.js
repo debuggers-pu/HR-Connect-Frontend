@@ -164,19 +164,31 @@ export default function CreateLeave({ setLoading, loading }) {
               >
                 Cancel
               </Button>
-              <Button
-                mt={4}
-                colorScheme="orange"
-                _active={{
-                  border: "1px solid black ",
-                  bg: "white",
-                  color: "orange.400",
-                }}
-                isLoading={isSubmitting}
-                type="submit"
-              >
-                Submit
-              </Button>
+              {loading ? (
+                <Button
+                  mt={4}
+                  isLoading
+                  loadingText="Loading"
+                  colorScheme="orange"
+                  spinnerPlacement="start"
+                >
+                  Submit
+                </Button>
+              ) : (
+                <Button
+                  mt={4}
+                  colorScheme="orange"
+                  _active={{
+                    border: "1px solid black ",
+                    bg: "white",
+                    color: "orange.400",
+                  }}
+                  isLoading={isSubmitting}
+                  type="submit"
+                >
+                  Submit
+                </Button>
+              )}
             </DrawerFooter>{" "}
           </DrawerContent>{" "}
         </form>

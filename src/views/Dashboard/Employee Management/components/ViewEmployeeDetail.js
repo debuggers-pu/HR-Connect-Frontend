@@ -37,12 +37,14 @@ const ViewEmployeeDetail = ({ isOpen, onOpen, onClose, user }) => {
   const { dateFormat } = useDateTime();
   const { leaveByUser } = useUserLeave();
   const [editToggler, setEditToggler] = useState(false);
+  const [loading, setLoading] = useState(false);
   const editTogglerHandler = () => {
     setEditToggler(!editToggler);
   };
 
   const onSubmit = async (data) => {
     try {
+      setLoading(true);
       const res = await api.patch(
         `/hrConnect/api/admin/update-user-type/${user?._id}`,
         data,
@@ -50,11 +52,14 @@ const ViewEmployeeDetail = ({ isOpen, onOpen, onClose, user }) => {
       );
       if (res == "User type updated successfully") {
         toast.success("User Type Updated Succesfully");
+        setLoading(false);
       } else {
         toast.error("Unable to Update User Type");
+        setLoading(false);
       }
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -122,9 +127,24 @@ const ViewEmployeeDetail = ({ isOpen, onOpen, onClose, user }) => {
                 <Button onClick={editTogglerHandler}>Edit</Button>
               )}
 
-              <Button colorScheme="orange" type="submit">
-                Save
-              </Button>
+              {editToggler ? (
+                loading ? (
+                  <Button
+                    isLoading
+                    loadingText="Loading"
+                    colorScheme="orange"
+                    spinnerPlacement="start"
+                  ></Button>
+                ) : (
+                  <Button colorScheme="orange" type="submit">
+                    Save
+                  </Button>
+                )
+              ) : (
+                <Button colorScheme="orange" disabled>
+                  Save
+                </Button>
+              )}
             </DrawerFooter>
           </form>
           <DrawerBody>
