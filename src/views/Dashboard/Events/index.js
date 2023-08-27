@@ -1,53 +1,80 @@
 import React, { useRef, useState } from "react";
-import { Flex } from "@chakra-ui/react";
-
+import { Button, Flex, useDisclosure } from "@chakra-ui/react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
+import EventCreateModal from "./EventCreateModal";
 
 const Events = () => {
   const calendarRef = useRef(null);
   const [events, setEvents] = useState([]);
 
-  //   const handleEventAdd = ({ event }) => {
+  const [addEvent, setAddEvent] = useState({
+    dateTime: "",
+    eventType: "",
+    desc: "",
+  });
 
-  //     setEvents((prevEvents) => [...prevEvents, event]);
-  //   };
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const handleDateClick = (arg) => {
-    const title = prompt("Event Title:");
-    if (title) {
-      const newEvent = { title, start: arg.date, allDay: arg.allDay };
-      setEvents((prevEvents) => [...prevEvents, newEvent]);
-    }
+    onOpen();
+    setAddEvent({
+      start: "",
+      eventType: "",
+      desc: "",
+    });
   };
 
+  const handleEventAdd = (newEvent) => {
+    setEvents((prevEvents) => [...prevEvents, newEvent]);
+  };
+
+  console.log(events);
   return (
-    <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>
-      <button
-        onClick={() =>
-          handleEventAdd({ event: { title: "New Event", start: "2023-07-07" } })
-        }
-      >
-        Add Event
-      </button>
-      <FullCalendar
-        plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-        initialView="dayGridMonth"
-        headerToolbar={{
-          start: "today prev,next",
-          center: "title",
-          end: "timeGridDay,timeGridWeek,dayGridMonth",
-        }}
-        editable={true}
-        selectable={true}
-        dateClick={handleDateClick}
-        ref={calendarRef}
-        // select={handleEventAdd}
-        events={events}
-      />
-    </Flex>
+    <>
+      {" "}
+      <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>
+        <Flex justifyContent={"center"} mb={8}>
+          <Button
+            mx={4}
+            p={4}
+            colorScheme="orange"
+            width={1 / 3}
+            _active={{
+              border: "1px solid black ",
+              bg: "white",
+              color: "orange.400",
+            }}
+            onClick={handleDateClick}
+          >
+            Add Event
+          </Button>
+        </Flex>{" "}
+        <FullCalendar
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          initialView="timeGridWeek"
+          headerToolbar={{
+            start: "today prev,next",
+            center: "title",
+            end: "timeGridDay,timeGridWeek,dayGridMonth",
+          }}
+          selectable={true}
+          // dateClick={handleDateClick}
+          ref={calendarRef}
+          events={events}
+        />
+        <EventCreateModal
+          addEvent={addEvent}
+          setAddEvent={setAddEvent}
+          isOpen={isOpen}
+          onOpen={onOpen}
+          onClose={onClose}
+          onEventAdd={handleEventAdd}
+        />
+      </Flex>
+    </>
   );
 };
 
