@@ -150,6 +150,12 @@ function SignIn() {
                     colorScheme="teal"
                     variant="outline"
                     spinnerPlacement="start"
+                    _hover={{
+                      bg: "orange.400",
+                    }}
+                    _active={{
+                      bg: "orange.500",
+                    }}
                   >
                     Submit
                   </Button>

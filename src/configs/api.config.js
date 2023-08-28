@@ -2,7 +2,9 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 
 const instance = axios.create({
-  baseURL: `${process.env.REACT_APP_BACKEND_URL}`,
+  // baseURL: `${process.env.REACT_APP_BACKEND_URL}`,
+  // baseURL: `http://192.168.1.119:5000/`,
+  baseURL: `http://localhost:8000`,
 
   timeout: 50000,
 });

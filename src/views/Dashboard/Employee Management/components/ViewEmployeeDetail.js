@@ -26,7 +26,14 @@ import { api } from "configs";
 import useDateTime from "hooks/useDateTime";
 import useUserLeave from "hooks/useUserLeave";
 
-const ViewEmployeeDetail = ({ isOpen, onOpen, onClose, user }) => {
+const ViewEmployeeDetail = ({
+  isOpen,
+  onOpen,
+  onClose,
+  user,
+  loading,
+  setLoading,
+}) => {
   const btnRef = React.useRef();
   const {
     handleSubmit,
@@ -37,32 +44,32 @@ const ViewEmployeeDetail = ({ isOpen, onOpen, onClose, user }) => {
   const { dateFormat } = useDateTime();
   const { leaveByUser } = useUserLeave();
   const [editToggler, setEditToggler] = useState(false);
-  const [loading, setLoading] = useState(false);
+
   const editTogglerHandler = () => {
     setEditToggler(!editToggler);
   };
 
   const onSubmit = async (data) => {
+    setLoading(true);
     try {
-      setLoading(true);
       const res = await api.patch(
         `/hrConnect/api/admin/update-user-type/${user?._id}`,
         data,
         true
       );
-      if (res == "User type updated successfully") {
-        toast.success("User Type Updated Succesfully");
-        setLoading(false);
+
+      if (res) {
+        toast.success("User Type Updated Successfully");
       } else {
         toast.error("Unable to Update User Type");
-        setLoading(false);
       }
     } catch (error) {
       console.log(error);
+      toast.error("An error occurred");
+    } finally {
       setLoading(false);
     }
   };
-
   return (
     <>
       <Drawer
@@ -128,18 +135,9 @@ const ViewEmployeeDetail = ({ isOpen, onOpen, onClose, user }) => {
               )}
 
               {editToggler ? (
-                loading ? (
-                  <Button
-                    isLoading
-                    loadingText="Loading"
-                    colorScheme="orange"
-                    spinnerPlacement="start"
-                  ></Button>
-                ) : (
-                  <Button colorScheme="orange" type="submit">
-                    Save
-                  </Button>
-                )
+                <Button colorScheme="orange" type="submit">
+                  Save
+                </Button>
               ) : (
                 <Button colorScheme="orange" disabled>
                   Save

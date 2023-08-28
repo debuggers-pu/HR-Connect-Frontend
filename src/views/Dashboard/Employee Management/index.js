@@ -8,36 +8,42 @@ import { api } from "configs";
 
 const EmployeeManagement = () => {
   const { user } = useCurrentUser();
-  const [allUsers, setAllUsers] = useState();
-  const [search, setSearch] = useState();
+  const [allUsers, setAllUsers] = useState([]);
+  const [searchedUser, setSearchedUser] = useState([]);
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(false);
-
   useEffect(() => {
+    setLoading(true);
     const getAllUsers = async () => {
-      setLoading(true);
       try {
         const res = await api.get("/hrConnect/api/user/get-all-users", true);
 
         if (res?.users?.length > 0) {
-          let filteredData = res.users;
-
-          if (search?.length > 2) {
-            filteredData = res?.users?.filter((data) =>
-              data?.fullName?.includes(search)
-            );
-          }
-
-          setAllUsers(filteredData);
-          setLoading(false);
+          setAllUsers(res?.users);
         }
       } catch (error) {
         console.log(error);
+      } finally {
         setLoading(false);
       }
     };
 
     getAllUsers();
   }, [search]);
+
+  useEffect(() => {
+    const searchUser = () => {
+      if (search?.length > 2) {
+        const filteredData = allUsers?.filter((data) =>
+          data?.fullName?.includes(search)
+        );
+        setSearchedUser(filteredData);
+      } else {
+        setSearchedUser(null);
+      }
+    };
+    searchUser();
+  }, [search, allUsers]);
 
   if (user?.userType !== "admin") {
     return <NotAuthorized />;
@@ -49,7 +55,11 @@ const EmployeeManagement = () => {
         setSearch={setSearch}
         setAllUsers={setAllUsers}
       />
-      <EmployeeTable usersList={allUsers} />
+      <EmployeeTable
+        usersList={searchedUser?.length > 0 ? searchedUser : allUsers}
+        loading={loading}
+        setLoading={setLoading}
+      />
     </Flex>
   );
 };

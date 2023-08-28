@@ -25,7 +25,7 @@ import {
 import ViewEmployeeDetail from "./ViewEmployeeDetail";
 import { api } from "configs";
 
-const EmployeeTable = ({ usersList }) => {
+const EmployeeTable = ({ usersList, loading, setLoading }) => {
   const textColor = useColorModeValue("gray.700", "white");
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { dateFormat } = useDateTime();
@@ -98,6 +98,8 @@ const EmployeeTable = ({ usersList }) => {
         onOpen={onOpen}
         onClose={onClose}
         user={userData}
+        loading={loading}
+        setLoading={setLoading}
       />
     </>
   );

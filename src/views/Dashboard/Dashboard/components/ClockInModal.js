@@ -21,7 +21,14 @@ import { BsFillCalendarDateFill } from "react-icons/bs";
 import { BiSolidTimeFive } from "react-icons/bi";
 import "./styles.scss";
 
-const ClockInModal = ({ isOpen, onClose }) => {
+const ClockInModal = ({
+  isOpen,
+  onOpen,
+  onClose,
+  handleClockIn,
+
+  setClockInLocation,
+}) => {
   const OverlayTwo = () => (
     <ModalOverlay
       bg="none"
@@ -60,16 +67,17 @@ const ClockInModal = ({ isOpen, onClose }) => {
               </Box>
             </div>
 
-            <Grid templateColumns="repeat(2, 1fr)" gap={6}>
-              <Box>
-                <Text as="b">Location</Text>
-                <Select placeholder="Select option">
-                  <option value="Nepal">Nepal</option>
-                </Select>
-              </Box>{" "}
+            <Grid templateColumns="repeat(1, 1fr)" gap={6}>
               <Box>
                 <Text as="b">Working From</Text>
-                <Input placeholder="Office,Home,Site" size="md" />
+                <Select
+                  placeholder="Select option"
+                  onChange={(e) => setClockInLocation(e.target.value || "")}
+                >
+                  <option value={"office"}>Office</option>
+                  <option value={"home"}>Home</option>
+                  <option value={"other"}>Other</option>
+                </Select>
               </Box>
             </Grid>
           </ModalBody>
@@ -77,7 +85,9 @@ const ClockInModal = ({ isOpen, onClose }) => {
             <Button variant="ghost" mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="blue">Clock In</Button>
+            <Button colorScheme="blue" onClick={handleClockIn}>
+              Clock In
+            </Button>
           </ModalFooter>
         </ModalContent>
       </Modal>
