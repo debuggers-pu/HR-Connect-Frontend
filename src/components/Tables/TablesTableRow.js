@@ -11,7 +11,7 @@ import {
 import React from "react";
 
 function TablesTableRow(props) {
-  const { logo, name, email, subdomain, domain, status, date } = props;
+  const { name, subdomain, domain, status, date } = props;
   const textColor = useColorModeValue("gray.700", "white");
   const bgStatus = useColorModeValue("gray.400", "#1a202c");
   const colorStatus = useColorModeValue("white", "gray.400");
@@ -20,7 +20,7 @@ function TablesTableRow(props) {
     <Tr>
       <Td minWidth={{ sm: "250px" }} pl="0px">
         <Flex align="center" py=".8rem" minWidth="100%" flexWrap="nowrap">
-          <Avatar src={logo} w="50px" borderRadius="12px" me="18px" />
+          {/* <Avatar src={logo} w="50px" borderRadius="12px" me="18px" /> */}
           <Flex direction="column">
             <Text
               fontSize="md"
@@ -31,7 +31,7 @@ function TablesTableRow(props) {
               {name}
             </Text>
             <Text fontSize="sm" color="gray.400" fontWeight="normal">
-              {email}
+              sandesh@herodai.com
             </Text>
           </Flex>
         </Flex>
@@ -40,14 +40,14 @@ function TablesTableRow(props) {
       <Td>
         <Flex direction="column">
           <Text fontSize="md" color={textColor} fontWeight="bold">
-            {domain}
+            dsadasd
           </Text>
           <Text fontSize="sm" color="gray.400" fontWeight="normal">
-            {subdomain}
+            dasdsad
           </Text>
         </Flex>
       </Td>
-      <Td>
+      {/* <Td>
         <Badge
           bg={status === "Clocked In" ? "green.400" : bgStatus}
           color={status === "Clocked In" ? "white" : colorStatus}
@@ -57,23 +57,16 @@ function TablesTableRow(props) {
         >
           {status}
         </Badge>
+      </Td> */}
+      <Td>
+        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+          dsadasd
+        </Text>
       </Td>
       <Td>
         <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
           {date}
         </Text>
-      </Td>
-      <Td>
-        <Button p="0px" bg="transparent" variant="no-hover">
-          <Text
-            fontSize="md"
-            color="gray.400"
-            fontWeight="bold"
-            cursor="pointer"
-          >
-            Edit
-          </Text>
-        </Button>
       </Td>
     </Tr>
   );
