@@ -26,7 +26,6 @@ const ClockInModal = ({
   onOpen,
   onClose,
   handleClockIn,
-
   setClockInLocation,
 }) => {
   const OverlayTwo = () => (

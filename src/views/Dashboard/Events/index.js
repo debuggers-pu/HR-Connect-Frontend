@@ -28,10 +28,10 @@ const Events = () => {
   };
 
   const handleEventAdd = (newEvent) => {
+    // make useffect here to fetch the data
     setEvents((prevEvents) => [...prevEvents, newEvent]);
   };
 
-  console.log(events);
   return (
     <>
       {" "}

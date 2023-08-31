@@ -13,29 +13,35 @@ import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import TablesTableRow from "components/Tables/TablesTableRow";
 import { api } from "configs";
+import useDateTime from "hooks/useDateTime";
 
 const Authors = ({ title, captions }) => {
   const textColor = useColorModeValue("gray.700", "white");
   const [clockedInUsers, setClockedInUsers] = useState([]);
+  const [clockedOutUser, setClockedOutUsers] = useState([]);
+  const { presentDate, currentDateTime } = useDateTime();
 
   useEffect(() => {
     const getAllClockedInUser = async () => {
       try {
         const res = await api.get(
-          "/hrConnect/api/attendance/getAllAttendanceByDate/2023-08-28T22:45:12.969Z",
+          `/hrConnect/api/attendance/getAllAttendanceByDate/${presentDate}`,
           true
         );
+
         if (res) {
-          setClockedInUsers(res);
+          setClockedInUsers(res.clockedInUsers);
+          setClockedOutUsers(res.clockedOutUser);
         }
       } catch (error) {
         console.log(error);
       }
     };
     getAllClockedInUser();
-  }, []);
+  }, [presentDate]);
 
-  console.log(clockedInUsers);
+  console.log("in", clockedInUsers);
+  console.log(clockedOutUser);
 
   return (
     <Card overflowX={{ sm: "scroll", xl: "hidden" }}>
@@ -59,6 +65,18 @@ const Authors = ({ title, captions }) => {
           </Thead>
           <Tbody>
             {clockedInUsers?.map((row) => {
+              return (
+                <TablesTableRow
+                  key={row._id}
+                  name={row?.employeeName}
+                  subdomain={row.subdomain}
+                  domain={row.domain}
+                  status={row.status}
+                  date={row.date}
+                />
+              );
+            })}{" "}
+            {clockedOutUser?.map((row) => {
               return (
                 <TablesTableRow
                   key={row._id}

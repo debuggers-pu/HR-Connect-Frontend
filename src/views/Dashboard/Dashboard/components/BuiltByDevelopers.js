@@ -39,9 +39,9 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
       }
 
       const res = await api.post(
-        "/hrConnect/api/attendance/createAttendance",
+        "/hrConnect/api/attendance/clockIn",
         {
-          date: currentDateTime,
+          date: presentDate,
           location: clockInLocation,
         },
         true
@@ -66,8 +66,8 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
         return;
       }
 
-      const res = await api.patch(
-        "/hrConnect/api/attendance/clockOutAttendance",
+      const res = await api.post(
+        "/hrConnect/api/attendance/clockOut",
         {},
         true
       );
