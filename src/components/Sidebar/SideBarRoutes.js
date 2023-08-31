@@ -3,12 +3,14 @@ import Dashboard from "views/Dashboard/Dashboard";
 import Attendence from "views/Dashboard/Attendence";
 import Leave from "views/Dashboard/Leave";
 import Profile from "views/Dashboard/Profile";
+import SignUp from "views/Dashboard/SignUP/index";
 
 import { HomeIcon, StatsIcon, CreditIcon } from "components/Icons/Icons";
 import Events from "views/Dashboard/Events";
 
 import { FaCalendarCheck, FaCog, FaUser } from "react-icons/fa";
 import EmployeeManagement from "views/Dashboard/Employee Management";
+import { RocketIcon } from "components/Icons/Icons";
 
 var SideBarRoutes = [
   {
@@ -46,6 +48,15 @@ var SideBarRoutes = [
     name: "Employee Management",
     icon: <FaUser color="inherit" />,
     component: EmployeeManagement,
+    layout: "/admin",
+  },
+  {
+    path: "/signup",
+    name: "Sign Up",
+    rtlName: "لوحة القيادة",
+    icon: <RocketIcon color="inherit" />,
+    secondaryNavbar: true,
+    component: SignUp,
     layout: "/admin",
   },
   {

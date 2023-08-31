@@ -15,6 +15,8 @@ import {
   Input,
 } from "@chakra-ui/react";
 import useDateTime from "hooks/useDateTime";
+import { api } from "configs";
+import { toast } from "react-hot-toast";
 
 const EventCreateModal = ({
   addEvent,
@@ -34,18 +36,26 @@ const EventCreateModal = ({
 
   const { presentDate, time, amOrPm } = useDateTime();
 
-  const onSaveHandler = () => {
+  const onSaveHandler = async () => {
     const newEvent = {
-      title: addEvent.desc,
-      type: addEvent.eventType,
-      start: addEvent.dateTime,
-      allDay: true, // You can customize this based on your requirement
+      description: addEvent.desc,
+      eventType: addEvent.eventType,
+      datetime: addEvent.dateTime,
+      // allDay: true,
     };
 
-    // Call the onEventAdd function with the newEvent data
     onEventAdd(newEvent);
+    const res = await api.post(
+      "/hrConnect/api/event/createEvent",
+      newEvent,
+      true
+    );
+    if (res?.status == "success") {
+      toast.success(`Event added for ${newEvent.datetime}`);
+    }
     onClose();
   };
+
   const eventTypeHandler = (e) => {
     const newValue = e.target?.value || "";
     setAddEvent((prev) => ({
@@ -95,9 +105,9 @@ const EventCreateModal = ({
                   value={addEvent.eventType || ""}
                   onChange={(e) => eventTypeHandler(e)}
                 >
-                  <option value="Everyone">Everyone</option>
-                  <option value="User">User</option>
-                  <option value="Admin">Admin</option>
+                  <option value="everyone">Everyone</option>
+                  <option value="user">User</option>
+                  <option value="admin">Admin</option>
                 </Select>
               </Box>
               <Box>

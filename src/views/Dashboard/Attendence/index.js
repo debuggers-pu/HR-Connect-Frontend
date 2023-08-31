@@ -2,8 +2,7 @@
 import { Flex, Image } from "@chakra-ui/react";
 import React from "react";
 import Authors from "./components/Authors";
-import Projects from "./components/Projects";
-import { tablesTableData, dashboardTableData } from "variables/general";
+
 import BuiltByDevelopers from "../Dashboard/components/BuiltByDevelopers";
 import peopleImage from "assets/img/people-image.png";
 
@@ -26,8 +25,7 @@ function Tables() {
       />
       <Authors
         title={"Attendence Table"}
-        captions={["Employee", "Designation", "Status", "Employed", ""]}
-        data={tablesTableData}
+        captions={["Employee", "Designation", "Status", "Clocked At"]}
       />
       {/* <Projects
         title={"Projects Table"}

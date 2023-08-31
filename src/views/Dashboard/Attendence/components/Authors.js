@@ -1,4 +1,4 @@
-// Chakra imports
+import React, { useEffect, useState } from "react";
 import {
   Table,
   Tbody,
@@ -8,29 +8,55 @@ import {
   Tr,
   useColorModeValue,
 } from "@chakra-ui/react";
-// Custom components
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import TablesTableRow from "components/Tables/TablesTableRow";
-import React from "react";
+import { api } from "configs";
+import useDateTime from "hooks/useDateTime";
 
-const Authors = ({ title, captions, data }) => {
+const Authors = ({ title, captions }) => {
   const textColor = useColorModeValue("gray.700", "white");
+  const [clockedInUsers, setClockedInUsers] = useState([]);
+  const [clockedOutUser, setClockedOutUsers] = useState([]);
+  const { presentDate, currentDateTime } = useDateTime();
+
+  useEffect(() => {
+    const getAllClockedInUser = async () => {
+      try {
+        const res = await api.get(
+          `/hrConnect/api/attendance/getAllAttendanceByDate/${presentDate}`,
+          true
+        );
+
+        if (res) {
+          setClockedInUsers(res.clockedInUsers);
+          setClockedOutUsers(res.clockedOutUser);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getAllClockedInUser();
+  }, [presentDate]);
+
+  console.log("in", clockedInUsers);
+  console.log(clockedOutUser);
+
   return (
     <Card overflowX={{ sm: "scroll", xl: "hidden" }}>
-      <CardHeader p='6px 0px 22px 0px'>
-        <Text fontSize='xl' color={textColor} fontWeight='bold'>
+      <CardHeader p="6px 0px 22px 0px">
+        <Text fontSize="xl" color={textColor} fontWeight="bold">
           {title}
         </Text>
       </CardHeader>
       <CardBody>
-        <Table variant='simple' color={textColor}>
+        <Table variant="simple" color={textColor}>
           <Thead>
-            <Tr my='.8rem' pl='0px' color='gray.400'>
+            <Tr my=".8rem" pl="0px" color="gray.400">
               {captions.map((caption, idx) => {
                 return (
-                  <Th color='gray.400' key={idx} ps={idx === 0 ? "0px" : null}>
+                  <Th color="gray.400" key={idx} ps={idx === 0 ? "0px" : null}>
                     {caption}
                   </Th>
                 );
@@ -38,13 +64,23 @@ const Authors = ({ title, captions, data }) => {
             </Tr>
           </Thead>
           <Tbody>
-            {data.map((row) => {
+            {clockedInUsers?.map((row) => {
               return (
                 <TablesTableRow
-                  key={`${row.email}-${row.name}`}
-                  name={row.name}
-                  logo={row.logo}
-                  email={row.email}
+                  key={row._id}
+                  name={row?.employeeName}
+                  subdomain={row.subdomain}
+                  domain={row.domain}
+                  status={row.status}
+                  date={row.date}
+                />
+              );
+            })}{" "}
+            {clockedOutUser?.map((row) => {
+              return (
+                <TablesTableRow
+                  key={row._id}
+                  name={row?.employeeName}
                   subdomain={row.subdomain}
                   domain={row.domain}
                   status={row.status}

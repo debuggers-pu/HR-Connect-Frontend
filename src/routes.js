@@ -5,7 +5,7 @@ import Leave from "views/Dashboard/Leave";
 import RTLPage from "views/Dashboard/RTL";
 import Profile from "views/Dashboard/Profile";
 import SignIn from "views/Auth/SignIn.js";
-import SignUp from "views/Auth/SignUp.js";
+import SignUp from "views/Dashboard/SignUP/index";
 import Events from "views/Dashboard/Events";
 
 import {
@@ -97,7 +97,7 @@ var dashRoutes = [
         icon: <RocketIcon color="inherit" />,
         secondaryNavbar: true,
         component: SignUp,
-        layout: "/auth",
+        layout: "/admin",
       },
     ],
   },
