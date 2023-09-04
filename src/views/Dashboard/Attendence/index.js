@@ -25,7 +25,13 @@ function Tables() {
       />
       <Authors
         title={"Attendence Table"}
-        captions={["Employee", "Designation", "Status", "Clocked At"]}
+        captions={[
+          "Employee",
+          "Location",
+          "Designation",
+          "Status",
+          "Clocked At",
+        ]}
       />
       {/* <Projects
         title={"Projects Table"}

@@ -70,6 +70,8 @@ const ViewEmployeeDetail = ({
       setLoading(false);
     }
   };
+
+  console.log({ leaveByUser });
   return (
     <>
       <Drawer
@@ -157,60 +159,62 @@ const ViewEmployeeDetail = ({
                 </Tr>
               </Thead>
               <Tbody>
-                {leaveByUser?.map((leaves) => {
-                  return (
-                    <Tr>
-                      <Td>
-                        <p>{leaves?.employeeName}</p>
-                      </Td>
-                      <Td>
-                        {dateFormat(leaves?.startDate)} to
-                        {" " + dateFormat(leaves?.endDate)}
-                      </Td>
-                      {leaves?.status == "pending" ? (
-                        <Td>
-                          {" "}
-                          <Badge
-                            variant="subtle"
-                            colorScheme="yellow"
-                            px={2}
-                            py={1}
-                            borderRadius={8}
-                          >
-                            {leaves?.status}
-                          </Badge>
-                        </Td>
-                      ) : leaves?.status == "approved" ? (
-                        <Td>
-                          {" "}
-                          <Badge
-                            variant="subtle"
-                            colorScheme="green"
-                            px={2}
-                            py={1}
-                            borderRadius={8}
-                          >
-                            {leaves?.status}
-                          </Badge>
-                        </Td>
-                      ) : (
-                        <Td>
-                          {" "}
-                          <Badge
-                            variant="subtle"
-                            colorScheme="red"
-                            px={2}
-                            py={1}
-                            borderRadius={8}
-                          >
-                            {leaves?.status}
-                          </Badge>
-                        </Td>
-                      )}
-                      <Td>{leaves?.leaveType}</Td>
-                    </Tr>
-                  );
-                })}
+                {leaveByUser.length
+                  ? leaveByUser?.map((leaves) => {
+                      return (
+                        <Tr>
+                          <Td>
+                            <p>{leaves?.employeeName}</p>
+                          </Td>
+                          <Td>
+                            {dateFormat(leaves?.startDate)} to
+                            {" " + dateFormat(leaves?.endDate)}
+                          </Td>
+                          {leaves?.status == "pending" ? (
+                            <Td>
+                              {" "}
+                              <Badge
+                                variant="subtle"
+                                colorScheme="yellow"
+                                px={2}
+                                py={1}
+                                borderRadius={8}
+                              >
+                                {leaves?.status}
+                              </Badge>
+                            </Td>
+                          ) : leaves?.status == "approved" ? (
+                            <Td>
+                              {" "}
+                              <Badge
+                                variant="subtle"
+                                colorScheme="green"
+                                px={2}
+                                py={1}
+                                borderRadius={8}
+                              >
+                                {leaves?.status}
+                              </Badge>
+                            </Td>
+                          ) : (
+                            <Td>
+                              {" "}
+                              <Badge
+                                variant="subtle"
+                                colorScheme="red"
+                                px={2}
+                                py={1}
+                                borderRadius={8}
+                              >
+                                {leaves?.status}
+                              </Badge>
+                            </Td>
+                          )}
+                          <Td>{leaves?.leaveType}</Td>
+                        </Tr>
+                      );
+                    })
+                  : "NO Leave Data Acquired"}
               </Tbody>
             </Table>
           </DrawerBody>

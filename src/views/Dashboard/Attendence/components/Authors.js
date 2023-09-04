@@ -31,7 +31,7 @@ const Authors = ({ title, captions }) => {
 
         if (res) {
           setClockedInUsers(res.clockedInUsers);
-          setClockedOutUsers(res.clockedOutUser);
+          setClockedOutUsers(res.clockedOutUsers);
         }
       } catch (error) {
         console.log(error);
@@ -39,9 +39,6 @@ const Authors = ({ title, captions }) => {
     };
     getAllClockedInUser();
   }, [presentDate]);
-
-  console.log("in", clockedInUsers);
-  console.log(clockedOutUser);
 
   return (
     <Card overflowX={{ sm: "scroll", xl: "hidden" }}>
@@ -69,9 +66,9 @@ const Authors = ({ title, captions }) => {
                 <TablesTableRow
                   key={row._id}
                   name={row?.employeeName}
-                  subdomain={row.subdomain}
-                  domain={row.domain}
-                  status={row.status}
+                  location={row.location}
+                  startTime={row.startTime}
+                  status={true}
                   date={row.date}
                 />
               );
@@ -81,9 +78,9 @@ const Authors = ({ title, captions }) => {
                 <TablesTableRow
                   key={row._id}
                   name={row?.employeeName}
-                  subdomain={row.subdomain}
-                  domain={row.domain}
-                  status={row.status}
+                  location={row.location}
+                  startTime={row.startTime}
+                  status={false}
                   date={row.date}
                 />
               );

@@ -52,7 +52,8 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
         setClockedInStatus(true);
         onClose();
       } else {
-        toast.error("Couldn't Clocked In");
+        console.log(res);
+        toast.error(res.message);
         onClose();
       }
     } catch (error) {

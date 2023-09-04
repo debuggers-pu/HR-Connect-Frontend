@@ -1,14 +1,16 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button, Flex, useDisclosure } from "@chakra-ui/react";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction";
 import EventCreateModal from "./EventCreateModal";
+import { api } from "configs";
 
 const Events = () => {
   const calendarRef = useRef(null);
   const [events, setEvents] = useState([]);
+  const [newEvent, setNewEvent] = useState([]);
 
   const [addEvent, setAddEvent] = useState({
     dateTime: "",
@@ -17,6 +19,19 @@ const Events = () => {
   });
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  useEffect(() => {
+    const getAllEvents = async () => {
+      const userId = localStorage.getItem("userId");
+      const res = await api.get(
+        `/hrConnect/api/event/getAllEvents/${userId}`,
+        true
+      );
+      console.log(res?.privateEvents);
+      setNewEvent(res.privateEvents);
+    };
+    getAllEvents();
+  }, []);
 
   const handleDateClick = (arg) => {
     onOpen();
