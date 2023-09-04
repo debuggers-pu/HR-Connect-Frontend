@@ -74,22 +74,6 @@ export default function CreateLeave({ setLoading, loading }) {
             <DrawerCloseButton /> <DrawerHeader>Request For Leave</DrawerHeader>
             <DrawerBody>
               <FormControl isInvalid={errors.name}>
-                {" "}
-                <FormLabel htmlFor="employeeName">First name</FormLabel>{" "}
-                <Input
-                  id="employeeName"
-                  placeholder="employeeName"
-                  {...register("employeeName", {
-                    required: "This is required",
-                    minLength: {
-                      value: 4,
-                      message: "Minimum length should be 4",
-                    },
-                  })}
-                />{" "}
-                <FormErrorMessage>
-                  {errors.employeeName && errors.employeeName.message}
-                </FormErrorMessage>
                 <FormLabel mt={4} htmlFor="name">
                   Leave Type
                 </FormLabel>{" "}

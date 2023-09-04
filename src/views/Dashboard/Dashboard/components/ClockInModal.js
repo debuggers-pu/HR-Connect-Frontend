@@ -71,7 +71,9 @@ const ClockInModal = ({
                 <Text as="b">Working From</Text>
                 <Select
                   placeholder="Select option"
-                  onChange={(e) => setClockInLocation(e.target.value || "")}
+                  onChange={(e) => {
+                    setClockInLocation(e.target.value || "");
+                  }}
                 >
                   <option value={"office"}>Office</option>
                   <option value={"home"}>Home</option>

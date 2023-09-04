@@ -3,12 +3,9 @@ import { toast } from "react-hot-toast";
 
 const instance = axios.create({
   // baseURL: `${process.env.REACT_APP_BACKEND_URL}`,
-  // baseURL: `http://192.168.1.119:5000/`,
   baseURL: `http://localhost:8000`,
-
   timeout: 50000,
 });
-
 export { instance };
 
 const getHeader = (isAuthenticated, type = "application/json") => {

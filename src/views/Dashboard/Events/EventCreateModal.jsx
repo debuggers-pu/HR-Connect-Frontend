@@ -105,9 +105,8 @@ const EventCreateModal = ({
                   value={addEvent.eventType || ""}
                   onChange={(e) => eventTypeHandler(e)}
                 >
-                  <option value="everyone">Everyone</option>
-                  <option value="user">User</option>
-                  <option value="admin">Admin</option>
+                  <option value="private">Private</option>
+                  <option value="public">Public</option>
                 </Select>
               </Box>
               <Box>

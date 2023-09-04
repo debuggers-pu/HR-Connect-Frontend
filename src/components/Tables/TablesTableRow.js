@@ -11,9 +11,9 @@ import {
 import React from "react";
 
 function TablesTableRow(props) {
-  const { name, subdomain, domain, status, date } = props;
+  const { name, location, startTime, status, date } = props;
+
   const textColor = useColorModeValue("gray.700", "white");
-  const bgStatus = useColorModeValue("gray.400", "#1a202c");
   const colorStatus = useColorModeValue("white", "gray.400");
 
   return (
@@ -36,37 +36,47 @@ function TablesTableRow(props) {
           </Flex>
         </Flex>
       </Td>
+      <Td>
+        <Text fontSize="md" color={textColor} fontWeight="bold">
+          {location}
+        </Text>
+      </Td>
 
       <Td>
         <Flex direction="column">
           <Text fontSize="md" color={textColor} fontWeight="bold">
-            dsadasd
+            User
           </Text>
           <Text fontSize="sm" color="gray.400" fontWeight="normal">
-            dasdsad
+            Teacher
           </Text>
         </Flex>
       </Td>
-      {/* <Td>
+      <Td>
         <Badge
-          bg={status === "Clocked In" ? "green.400" : bgStatus}
-          color={status === "Clocked In" ? "white" : colorStatus}
+          bg={status ? "green.400" : "red.400"}
           fontSize="16px"
           p="3px 10px"
           borderRadius="8px"
+          color={colorStatus}
         >
-          {status}
+          {status ? "Clocked In" : "Clocked Out"}
         </Badge>
+      </Td>
+      {/* <Td>
+        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
+          {status ? "Clocked In" : "Clocked Out"}
+        </Text>
       </Td> */}
       <Td>
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          dsadasd
-        </Text>
-      </Td>
-      <Td>
-        <Text fontSize="md" color={textColor} fontWeight="bold" pb=".5rem">
-          {date}
-        </Text>
+        <Flex direction="column">
+          <Text fontSize="md" color={textColor} fontWeight="bold">
+            {startTime}
+          </Text>
+          <Text fontSize="sm" color="gray.400" fontWeight="normal">
+            {date}
+          </Text>
+        </Flex>
       </Td>
     </Tr>
   );

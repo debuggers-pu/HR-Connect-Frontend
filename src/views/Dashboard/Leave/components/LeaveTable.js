@@ -50,15 +50,16 @@ const LeaveTable = ({ leaveByUser, setLoading }) => {
 
   const deleteLeaveHandler = async (id, status) => {
     setLoading(true);
-    if (id && status == "pending") {
+    if (id) {
       setLoading(true);
       const res = await api.delete(
         `/hrConnect/api/leave/delete-leave/${id}`,
         true
       );
       if (res.status == "success") {
+        console.log(res);
         toast.success(
-          `${res?.leave?.employeeName} having ${res?.leave?.leaveType} from ${res?.leave?.startDate} to ${res?.leave?.endDate} has been deleted succefully `
+          `${res?.data?.leave?.employeeName} leave has been deleted succefully `
         );
         setLoading(false);
       } else {
@@ -176,11 +177,6 @@ const LeaveTable = ({ leaveByUser, setLoading }) => {
               );
             })}
           </Tbody>
-          <Tfoot>
-            <Tr>
-              <Th isNumeric>Pagination to be added</Th>
-            </Tr>
-          </Tfoot>
         </Table>
       </TableContainer>
 

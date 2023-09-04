@@ -65,9 +65,10 @@ function SignUp() {
           direction="column"
           w="100%"
           justifyContent="center"
-          background="transparent"
+          background="white"
           p="48px"
           mt={{ md: "150px", lg: "80px" }}
+          borderRadius={"10px"}
         >
           {" "}
           <Heading color={titleColor} fontSize="46px" mb="10px">
@@ -119,14 +120,14 @@ function SignUp() {
             </div>
             <div>
               <FormLabel ms="4px" fontSize="md" fontWeight="normal">
-                phoneNumber Number
+                Phone Number
               </FormLabel>
               <Input
                 borderRadius="15px"
                 mb="24px"
                 fontSize="sm"
                 type="text"
-                placeholder="Your phoneNumber Number"
+                placeholder="Your Phone Number"
                 size="md"
                 value={phoneNumber}
                 onChange={(e) => {
