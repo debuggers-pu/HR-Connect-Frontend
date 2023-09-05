@@ -10,7 +10,9 @@ import { api } from "configs";
 const Events = () => {
   const calendarRef = useRef(null);
   const [events, setEvents] = useState([]);
+  const [babbal, setBabbal] = useState([]);
   const [newEvent, setNewEvent] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const [addEvent, setAddEvent] = useState({
     dateTime: "",
@@ -23,15 +25,30 @@ const Events = () => {
   useEffect(() => {
     const getAllEvents = async () => {
       const userId = localStorage.getItem("userId");
+      setLoading(true);
       const res = await api.get(
         `/hrConnect/api/event/getAllEvents/${userId}`,
         true
       );
-      console.log(res?.privateEvents);
+
       setNewEvent(res.privateEvents);
     };
     getAllEvents();
-  }, []);
+    setLoading(false);
+  }, [loading]);
+
+  useEffect(() => {
+    const setAllEvents = () => {
+      const events = newEvent.map((item) => ({
+        title: item.description,
+        start: new Date(item.datetime),
+        // allDay: true,
+        backgroundColor: "#2c3e50",
+      }));
+      setBabbal(events);
+    };
+    setAllEvents();
+  }, [newEvent]);
 
   const handleDateClick = (arg) => {
     onOpen();
@@ -69,7 +86,7 @@ const Events = () => {
         </Flex>{" "}
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          initialView="timeGridWeek"
+          initialView="dayGridMonth"
           headerToolbar={{
             start: "today prev,next",
             center: "title",
@@ -78,7 +95,7 @@ const Events = () => {
           selectable={true}
           // dateClick={handleDateClick}
           ref={calendarRef}
-          events={events}
+          events={babbal}
         />
         <EventCreateModal
           addEvent={addEvent}
@@ -87,6 +104,8 @@ const Events = () => {
           onOpen={onOpen}
           onClose={onClose}
           onEventAdd={handleEventAdd}
+          loading={loading}
+          setLoading={setLoading}
         />
       </Flex>
     </>
