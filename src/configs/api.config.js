@@ -2,8 +2,8 @@ import axios from "axios";
 import { toast } from "react-hot-toast";
 
 const instance = axios.create({
-  // baseURL: `${process.env.REACT_APP_BACKEND_URL}`,
-  baseURL: `http://localhost:8000`,
+  baseURL: `${process.env.REACT_APP_BACKEND_URL}`,
+  // baseURL: `http://localhost:8000`,
   timeout: 50000,
 });
 export { instance };
@@ -72,9 +72,9 @@ export const api = {
 
       return { status: "success", data: response.data };
     } catch (error) {
-      const message = handleError(error);
-
-      return { status: "failure", message: message };
+      // const message = handleError(error);
+      // return { status: "failure", message: message };
+      return error.response.data;
     }
   },
   patch: async (

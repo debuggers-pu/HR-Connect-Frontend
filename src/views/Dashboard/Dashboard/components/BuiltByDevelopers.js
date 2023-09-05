@@ -11,7 +11,7 @@ import {
 // Custom components
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 // react icons
 // import { BsArrowRight } from "react-icons/bs";
 import { BiDoorOpen } from "react-icons/bi";
@@ -26,7 +26,13 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
 
   const [clockOutDateTime, setClockOutDateTime] = useState();
   const [clockInLocation, setClockInLocation] = useState();
-  const [clockedInStatus, setClockedInStatus] = useState(false);
+  // const [clockedInStatus, setClockedInStatus] = useState(false);
+
+  let clockInStatus;
+
+  useEffect(() => {
+    clockInStatus = localStorage.getItem("clockInStatus") || "";
+  }, [clockInStatus]);
 
   const { currentDateTime, presentDate, dayOfWeek } = useDateTime();
   // Clock In Modal
@@ -49,11 +55,11 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
 
       if (res?.status == "success") {
         toast.success("Clocked In Successfully");
-        setClockedInStatus(true);
+        // setClockedInStatus(true);
+        localStorage.setItem("clockInStatus", true);
         onClose();
       } else {
-        console.log(res);
-        toast.error(res.message);
+        toast.error(res.error);
         onClose();
       }
     } catch (error) {
@@ -75,10 +81,11 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
 
       if (res?.status == "success") {
         toast.success("Clocked Out Successfully");
-        setClockedInStatus(false);
+        // setClockedInStatus(false);
+        localStorage.setItem("clockInStatus", false);
         onClose();
       } else {
-        toast.error("Couldn't Clocked Out");
+        toast.error(res.error);
         onClose();
       }
     } catch (error) {
@@ -118,7 +125,7 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
               </Text>
 
               <Flex align="center" sx={{ marginTop: "24px" }}>
-                {clockedInStatus ? (
+                {clockInStatus ? (
                   <Button
                     colorScheme="red"
                     size="lg"
