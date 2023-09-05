@@ -72,9 +72,11 @@ export const api = {
 
       return { status: "success", data: response.data };
     } catch (error) {
-      // const message = handleError(error);
-      // return { status: "failure", message: message };
-      return error.response.data;
+      if (error?.response?.data) return error?.response?.data;
+      else {
+        const message = handleError(error);
+        return { status: "failure", message: message };
+      }
     }
   },
   patch: async (

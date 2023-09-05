@@ -8,6 +8,7 @@ import PropTypes from "prop-types";
 // Chakra Imports
 import { NavLink } from "react-router-dom/cjs/react-router-dom";
 import {
+  Box,
   Button,
   Flex,
   Menu,
@@ -42,8 +43,9 @@ export default function HeaderLinks(props) {
     navbarIcon = "white";
     mainText = "white";
   }
-  const settingsRef = React.useRef();
+
   const { userLogout, LeaveNotifications } = useCurrentUser();
+
   return (
     <Flex
       pe={{ sm: "0px", md: "16px" }}
@@ -53,14 +55,25 @@ export default function HeaderLinks(props) {
     >
       <Menu>
         <MenuButton>
-          <BellIcon color={navbarIcon} w="18px" h="18px" />
+          <BellIcon w="18px" h="18px" />
         </MenuButton>
-        <MenuList p="16px 8px">
+
+        <MenuList
+          p="14px 0px"
+          overflowX="auto"
+          maxHeight="300px"
+          color="white"
+          sx={{
+            "::-webkit-scrollbar": {
+              display: "none",
+            },
+          }}
+        >
           <Flex flexDirection="column">
             {LeaveNotifications.length
               ? LeaveNotifications.map((notification, id) => {
                   return (
-                    <MenuItem borderRadius="8px" mb="10px">
+                    <MenuItem borderRadius="8px" mb="10px" key={id}>
                       <ItemContent
                         time="13 minutes ago"
                         info={notification?.message}
@@ -105,7 +118,7 @@ export default function HeaderLinks(props) {
           borderRadius="md"
           _expanded={{ bg: "orange.500" }}
         >
-          <SettingsIcon cursor="pointer" color={navbarIcon} w="18px" h="18px" />
+          <SettingsIcon cursor="pointer" w="18px" h="18px" />
         </MenuButton>
         <MenuList>
           <Flex flexDirection="column">

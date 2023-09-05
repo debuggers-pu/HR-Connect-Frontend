@@ -83,14 +83,14 @@ function SignUp() {
           >
             Fill the form below
           </Text>
-          <Grid templateColumns="repeat(2, 1fr)" gap={6}>
+          <Grid templateColumns="repeat(2, 1fr)" gap={4}>
             <div>
               <FormLabel ms="4px" fontSize="md" fontWeight="normal">
                 Full Name
               </FormLabel>
               <Input
                 borderRadius="15px"
-                mb="24px"
+                mb="20px"
                 fontSize="sm"
                 type="text"
                 placeholder="Your Full Name"
@@ -107,7 +107,7 @@ function SignUp() {
               </FormLabel>
               <Input
                 borderRadius="15px"
-                mb="24px"
+                mb="20px"
                 fontSize="sm"
                 type="text"
                 placeholder="Your User Name"
@@ -124,7 +124,7 @@ function SignUp() {
               </FormLabel>
               <Input
                 borderRadius="15px"
-                mb="24px"
+                mb="20px"
                 fontSize="sm"
                 type="text"
                 placeholder="Your Phone Number"
@@ -141,7 +141,7 @@ function SignUp() {
               </FormLabel>
               <Input
                 borderRadius="15px"
-                mb="24px"
+                mb="20px"
                 fontSize="sm"
                 type="text"
                 placeholder="Your Location "
@@ -159,7 +159,7 @@ function SignUp() {
               </FormLabel>
               <Input
                 borderRadius="15px"
-                mb="24px"
+                mb="20px"
                 fontSize="sm"
                 type="text"
                 placeholder="Your email adress"

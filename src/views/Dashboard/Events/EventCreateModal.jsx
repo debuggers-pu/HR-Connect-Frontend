@@ -14,7 +14,7 @@ import {
   Text,
   Input,
 } from "@chakra-ui/react";
-import useDateTime from "hooks/useDateTime";
+
 import { api } from "configs";
 import { toast } from "react-hot-toast";
 
@@ -24,27 +24,23 @@ const EventCreateModal = ({
   isOpen,
   onClose,
   onEventAdd,
+  loading,
+  setLoading,
 }) => {
   const OverlayTwo = () => (
-    <ModalOverlay
-      bg="none"
-      backdropFilter="auto"
-      backdropInvert="80%"
-      backdropBlur="2px"
-    />
+    <ModalOverlay bg="none" backdropFilter="auto" backdropBlur="1px" />
   );
-
-  const { presentDate, time, amOrPm } = useDateTime();
 
   const onSaveHandler = async () => {
     const newEvent = {
       description: addEvent.desc,
       eventType: addEvent.eventType,
       datetime: addEvent.dateTime,
-      // allDay: true,
+      allDay: true,
     };
 
     onEventAdd(newEvent);
+    setLoading(true);
     const res = await api.post(
       "/hrConnect/api/event/createEvent",
       newEvent,
@@ -53,6 +49,7 @@ const EventCreateModal = ({
     if (res?.status == "success") {
       toast.success(`Event added for ${newEvent.datetime}`);
     }
+    setLoading(false);
     onClose();
   };
 
@@ -64,6 +61,7 @@ const EventCreateModal = ({
     }));
   };
   const eventDescHandler = (e) => {
+    e.stopPropagation();
     const newValue = e.target?.value || "";
     setAddEvent((prev) => ({
       ...prev,
@@ -123,9 +121,15 @@ const EventCreateModal = ({
             <Button variant="ghost" mr={3} onClick={onClose}>
               Cancel
             </Button>
-            <Button colorScheme="blue" onClick={onSaveHandler}>
-              Save
-            </Button>
+            {loading ? (
+              <Button colorScheme="blue" disabled>
+                Save
+              </Button>
+            ) : (
+              <Button colorScheme="blue" onClick={onSaveHandler}>
+                Save
+              </Button>
+            )}
           </ModalFooter>
         </ModalContent>
       </Modal>
