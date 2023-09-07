@@ -4,7 +4,7 @@ import {
   TableContainer,
   Tbody,
   Td,
-  Tfoot,
+  Text,
   Th,
   Thead,
   Tr,
@@ -33,6 +33,7 @@ const LeaveTable = ({ leaveByUser, setLoading }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [leaveId, setLeaveId] = useState();
   const [data, setData] = useState();
+  const bgColor = useColorModeValue("white", "gray.700");
 
   const viewLeaveHandler = async () => {
     if (leaveId) {
@@ -57,7 +58,6 @@ const LeaveTable = ({ leaveByUser, setLoading }) => {
         true
       );
       if (res.status == "success") {
-        console.log(res);
         toast.success(
           `${res?.data?.leave?.employeeName} leave has been deleted succefully `
         );
@@ -72,7 +72,22 @@ const LeaveTable = ({ leaveByUser, setLoading }) => {
 
   return (
     <>
-      <TableContainer variant="simple" color={textColor}>
+      <TableContainer
+        variant="simple"
+        color={textColor}
+        bg={bgColor}
+        p="8px"
+        style={{ borderRadius: "10px" }}
+      >
+        {" "}
+        <Text
+          color={"orange.500"}
+          fontSize="lg"
+          fontWeight="bold"
+          padding={"4"}
+        >
+          Your Leave Table
+        </Text>
         <Table size="md" variant="simple">
           <Thead>
             <Tr>

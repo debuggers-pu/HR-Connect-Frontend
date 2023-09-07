@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import {
   Badge,
+  Box,
   Button,
   Drawer,
   DrawerBody,
@@ -11,6 +12,7 @@ import {
   DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
+  Flex,
   FormErrorMessage,
   FormLabel,
   Select,
@@ -25,12 +27,14 @@ import {
 import { api } from "configs";
 import useDateTime from "hooks/useDateTime";
 import useUserLeave from "hooks/useUserLeave";
+import WorkLoadCart from "components/Charts/WorkLoadChart";
 
 const ViewEmployeeDetail = ({
   isOpen,
   onOpen,
   onClose,
   user,
+  workHour,
   loading,
   setLoading,
 }) => {
@@ -71,7 +75,6 @@ const ViewEmployeeDetail = ({
     }
   };
 
-  console.log({ leaveByUser });
   return (
     <>
       <Drawer
@@ -84,43 +87,48 @@ const ViewEmployeeDetail = ({
         <DrawerOverlay />
         <DrawerContent>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <DrawerCloseButton /> <DrawerHeader> User Detail</DrawerHeader>
+            <DrawerCloseButton /> <DrawerHeader> User's Detail</DrawerHeader>
             <DrawerBody>
-              <FormLabel htmlFor="fullName">Full Name</FormLabel>{" "}
-              <Text>{user?.fullName}</Text>
-              <FormLabel mt={4} htmlFor="userType">
-                User Name
-              </FormLabel>{" "}
-              <Text>{user?.username}</Text>
-              <FormLabel mt={4} htmlFor="userType">
-                User Type
-              </FormLabel>{" "}
-              {editToggler ? (
-                <>
-                  <Select
-                    defaultValue={user?.userType}
-                    {...register("userType", {
-                      required: "This is required",
-                    })}
-                  >
-                    <option value="admin">Admin</option>
-                    <option value="user">User</option>
-                  </Select>
-                  <FormErrorMessage>
-                    {errors.username && errors.username.message}
-                  </FormErrorMessage>
-                </>
-              ) : (
-                <Text>{user?.userType}</Text>
-              )}
-              <FormLabel mt={4} htmlFor="email">
-                Email
-              </FormLabel>{" "}
-              <Text>{user?.email}</Text>
-              <FormLabel mt={4} htmlFor="">
-                Created at
+              <Flex>
+                <FormLabel htmlFor="fullName">Full Name:</FormLabel>{" "}
+                <Text>{user?.fullName}</Text>
+              </Flex>
+              <Flex mt={4}>
+                <FormLabel htmlFor="userType">User Name</FormLabel>{" "}
+                <Text>{user?.username}</Text>
+              </Flex>
+              <Flex mt={4}>
+                {" "}
+                <FormLabel htmlFor="userType">User Type</FormLabel>{" "}
+                {editToggler ? (
+                  <>
+                    <Select
+                      defaultValue={user?.userType}
+                      {...register("userType", {
+                        required: "This is required",
+                      })}
+                    >
+                      <option value="admin">Admin</option>
+                      <option value="user">User</option>
+                    </Select>
+                    <FormErrorMessage>
+                      {errors.username && errors.username.message}
+                    </FormErrorMessage>
+                  </>
+                ) : (
+                  <Text>{user?.userType}</Text>
+                )}
+              </Flex>
+              <Flex mt={4}>
+                {" "}
+                <FormLabel htmlFor="email">Email</FormLabel>{" "}
+                <Text>{user?.email}</Text>
+              </Flex>
+              <Flex mt={4}>
+                {" "}
+                <FormLabel htmlFor="">Created at</FormLabel>{" "}
                 <Text>{dateFormat(user?.createdAt)}</Text>
-              </FormLabel>{" "}
+              </Flex>
             </DrawerBody>
             <DrawerFooter gap={6}>
               {editToggler ? (
@@ -148,6 +156,10 @@ const ViewEmployeeDetail = ({
             </DrawerFooter>
           </form>
           <DrawerBody>
+            <Box mt={8}>
+              <DrawerHeader> Today's Working Hour</DrawerHeader>
+              <WorkLoadCart workHour={workHour} />{" "}
+            </Box>
             <DrawerHeader> User Leave List</DrawerHeader>
             <Table size="md" variant="simple">
               <Thead>

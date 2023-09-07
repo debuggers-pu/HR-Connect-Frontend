@@ -85,12 +85,12 @@ export const barChartOptions = {
 
 export const lineChartData = [
   {
-    name: "Mobile apps",
-    data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
+    name: "Clocked In Time",
+    data: [0, 9.3, 11.15, 10.07, 10.22, 10.04, 9.45],
   },
   {
-    name: "Websites",
-    data: [30, 90, 40, 140, 290, 290, 340, 230, 400],
+    name: "Clocked Out Time",
+    data: [0, 4.3, 5.15, 6.07, 5.22, 5.15, 6.3],
   },
 ];
 
@@ -112,18 +112,13 @@ export const lineChartOptions = {
   xaxis: {
     type: "datetime",
     categories: [
-      "Jan",
-      "Feb",
-      "Mar",
-      "Apr",
-      "May",
-      "Jun",
-      "Jul",
-      "Aug",
-      "Sep",
-      "Oct",
-      "Nov",
-      "Dec",
+      "Saturday",
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
     ],
     labels: {
       style: {
