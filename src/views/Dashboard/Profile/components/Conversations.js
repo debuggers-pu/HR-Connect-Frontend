@@ -1,8 +1,10 @@
 // Chakra imports
 import {
   Avatar,
+  Box,
   Button,
   Flex,
+  Spacer,
   Text,
   useColorModeValue,
 } from "@chakra-ui/react";
@@ -16,166 +18,77 @@ import avatar6 from "assets/img/avatars/avatar6.png";
 import Card from "components/Card/Card";
 import CardBody from "components/Card/CardBody";
 import CardHeader from "components/Card/CardHeader";
+import useDateTime from "hooks/useDateTime";
+import useUserLeave from "hooks/useUserLeave";
 import React from "react";
 
 const Conversations = ({ title }) => {
   // Chakra color mode
   const textColor = useColorModeValue("gray.700", "white");
+  const { approvedLeave } = useUserLeave();
+  const { dateFormat } = useDateTime();
 
   return (
     <Card p="16px">
       <CardHeader p="12px 5px" mb="12px">
-        <Text fontSize="lg" color={textColor} fontWeight="bold">
-          {title}
-        </Text>
+        <Box
+          style={{
+            width: "100%",
+            display: "flex",
+            justifyContent: "space-between",
+          }}
+        >
+          <Text fontSize="lg" color={textColor} fontWeight="bold">
+            Users on leave
+          </Text>
+
+          <Text fontSize="lg" color={textColor} fontWeight="bold">
+            Reasons info
+          </Text>
+        </Box>
       </CardHeader>
       <CardBody px="5px">
         <Flex direction="column" w="100%">
-          <Flex justifyContent="space-between" mb="21px">
-            <Flex align="center">
-              <Avatar
-                src={avatar2}
-                w="50px"
-                h="50px"
-                borderRadius="15px"
-                me="10px"
-              />
-              <Flex direction="column">
-                <Text fontSize="sm" color={textColor} fontWeight="bold">
-                  Sophie B.{" "}
-                </Text>
-                <Text fontSize="xs" color="gray.500" fontWeight="400">
-                  Hi! I need more information...
-                </Text>
-              </Flex>
-            </Flex>
-            <Button p="0px" bg="transparent" variant="no-hover">
-              <Text
-                fontSize="sm"
-                fontWeight="600"
-                color="#F29727"
-                alignSelf="center"
-              >
-                REPLY
-              </Text>
-            </Button>
-          </Flex>
-          <Flex justifyContent="space-between" mb="21px">
-            <Flex align="center">
-              <Avatar
-                src={avatar3}
-                w="50px"
-                h="50px"
-                borderRadius="15px"
-                me="10px"
-              />
-              <Flex direction="column">
-                <Text fontSize="sm" color={textColor} fontWeight="bold">
-                  Sophie B.{" "}
-                </Text>
-                <Text fontSize="xs" color="gray.500" fontWeight="400">
-                  Awesome work, can you change...
-                </Text>
-              </Flex>
-            </Flex>
-            <Button p="0px" bg="transparent" variant="no-hover">
-              <Text
-                fontSize="sm"
-                fontWeight="600"
-                color="#F29727"
-                alignSelf="center"
-              >
-                REPLY
-              </Text>
-            </Button>
-          </Flex>
-          <Flex justifyContent="space-between" mb="21px">
-            <Flex align="center">
-              <Avatar
-                src={avatar4}
-                w="50px"
-                h="50px"
-                borderRadius="15px"
-                me="10px"
-              />
-              <Flex direction="column">
-                <Text fontSize="sm" color={textColor} fontWeight="bold">
-                  Sophie B.{" "}
-                </Text>
-                <Text fontSize="xs" color="gray.500" fontWeight="400">
-                  Have a great afternoon...
-                </Text>
-              </Flex>
-            </Flex>
-            <Button p="0px" bg="transparent" variant="no-hover">
-              <Text
-                fontSize="sm"
-                fontWeight="600"
-                color="#F29727"
-                alignSelf="center"
-              >
-                REPLY
-              </Text>
-            </Button>
-          </Flex>
-          <Flex justifyContent="space-between" mb="21px">
-            <Flex align="center">
-              <Avatar
-                src={avatar5}
-                w="50px"
-                h="50px"
-                borderRadius="15px"
-                me="10px"
-              />
-              <Flex direction="column">
-                <Text fontSize="sm" color={textColor} fontWeight="bold">
-                  Sophie B.{" "}
-                </Text>
-                <Text fontSize="xs" color="gray.500" fontWeight="400">
-                  About files I can...
-                </Text>
-              </Flex>
-            </Flex>
-            <Button p="0px" bg="transparent" variant="no-hover">
-              <Text
-                fontSize="sm"
-                fontWeight="600"
-                color="#F29727"
-                alignSelf="center"
-              >
-                REPLY
-              </Text>
-            </Button>
-          </Flex>
-          <Flex justifyContent="space-between" mb="21px">
-            <Flex align="center">
-              <Avatar
-                src={avatar6}
-                w="50px"
-                h="50px"
-                borderRadius="15px"
-                me="10px"
-              />
-              <Flex direction="column">
-                <Text fontSize="sm" color={textColor} fontWeight="bold">
-                  Sophie B.{" "}
-                </Text>
-                <Text fontSize="xs" color="gray.500" fontWeight="400">
-                  About files I can...
-                </Text>
-              </Flex>
-            </Flex>
-            <Button p="0px" bg="transparent" variant="no-hover">
-              <Text
-                fontSize="sm"
-                fontWeight="600"
-                color="#F29727"
-                alignSelf="center"
-              >
-                REPLY
-              </Text>
-            </Button>
-          </Flex>
+          {approvedLeave.length
+            ? approvedLeave?.map((user, id) => (
+                <Flex
+                  justifyContent="space-between"
+                  mb="21px"
+                  key={`user${id}`}
+                >
+                  <Flex align="center">
+                    <Avatar
+                      src={`avatar${id}`}
+                      w="50px"
+                      h="50px"
+                      borderRadius="15px"
+                      me="10px"
+                    />
+                    <Flex direction="column">
+                      <Text fontSize="md" color={textColor} fontWeight="bold">
+                        {user?.employeeName}
+                      </Text>
+                      <Text fontSize="md" fontWeight="600" color="#F29727">
+                        {user?.leaveType}
+                      </Text>
+                    </Flex>
+                  </Flex>
+                  <Flex
+                    p="0px"
+                    bg="transparent"
+                    direction="column"
+                    variant="no-hover"
+                  >
+                    <Text fontSize="sm" fontWeight="500" alignSelf="center">
+                      {user?.reason}
+                    </Text>{" "}
+                    <Text fontSize="sm" fontWeight="500" alignSelf="center">
+                      {dateFormat(user?.startDate)}
+                    </Text>
+                  </Flex>
+                </Flex>
+              ))
+            : "NO USERS ARE ON LEAVE"}
         </Flex>
       </CardBody>
     </Card>

@@ -11,28 +11,21 @@ import {
 // Custom components
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import React, { Fragment, useEffect, useState } from "react";
-// react icons
-// import { BsArrowRight } from "react-icons/bs";
+import React, { useState } from "react";
 import { BiDoorOpen } from "react-icons/bi";
 import ClockInModal from "./ClockInModal";
 import useDateTime from "hooks/useDateTime";
 import { api } from "configs";
 import { toast } from "react-hot-toast";
-import { set } from "react-hook-form";
 
 const BuiltByDevelopers = ({ title, name, description, image }) => {
   const textColor = useColorModeValue("gray.700", "white");
 
-  const [clockOutDateTime, setClockOutDateTime] = useState();
   const [clockInLocation, setClockInLocation] = useState();
-  // const [clockedInStatus, setClockedInStatus] = useState(false);
 
-  let clockInStatus;
-
-  useEffect(() => {
-    clockInStatus = localStorage.getItem("clockInStatus") || "";
-  }, [clockInStatus]);
+  const [clockedInStatus, setClockedInStatus] = useState(
+    localStorage.getItem("clockInStatus") === "true" // Parse the value to a boolean
+  );
 
   const { currentDateTime, presentDate, dayOfWeek } = useDateTime();
   // Clock In Modal
@@ -55,7 +48,7 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
 
       if (res?.status == "success") {
         toast.success("Clocked In Successfully");
-        // setClockedInStatus(true);
+        setClockedInStatus(true);
         localStorage.setItem("clockInStatus", true);
         onClose();
       } else {
@@ -81,8 +74,8 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
 
       if (res?.status == "success") {
         toast.success("Clocked Out Successfully");
-        // setClockedInStatus(false);
         localStorage.setItem("clockInStatus", false);
+        setClockedInStatus(false);
         onClose();
       } else {
         toast.error(res.error);
@@ -125,7 +118,7 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
               </Text>
 
               <Flex align="center" sx={{ marginTop: "24px" }}>
-                {clockInStatus ? (
+                {clockedInStatus ? ( // Check the value of clockedInStatus
                   <Button
                     colorScheme="red"
                     size="lg"
