@@ -14,32 +14,11 @@ import CardHeader from "components/Card/CardHeader.js";
 import TablesTableRow from "components/Tables/TablesTableRow";
 import { api } from "configs";
 import useDateTime from "hooks/useDateTime";
+import useUserHook from "hooks/useUserHook";
 
 const Authors = ({ title, captions }) => {
   const textColor = useColorModeValue("gray.700", "white");
-  const [clockedInUsers, setClockedInUsers] = useState([]);
-  const [clockedOutUser, setClockedOutUsers] = useState([]);
-  const { presentDate, currentDateTime } = useDateTime();
-
-  useEffect(() => {
-    const getAllClockedInUser = async () => {
-      try {
-        const res = await api.get(
-          `/hrConnect/api/attendance/getAllAttendanceByDate/${presentDate}`,
-          true
-        );
-
-        if (res) {
-          setClockedInUsers(res.clockedInUsers);
-          setClockedOutUsers(res.clockedOutUsers);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getAllClockedInUser();
-  }, [presentDate]);
-
+  const { clockedInUsers, clockedOutUser } = useUserHook();
   return (
     <Card overflowX={{ sm: "scroll", xl: "hidden" }}>
       <CardHeader p="6px 0px 22px 0px">
