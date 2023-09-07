@@ -1,9 +1,5 @@
 import React, { useState } from "react";
 import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
   Table,
   TableContainer,
   Tbody,
@@ -16,20 +12,18 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 import useDateTime from "hooks/useDateTime";
-import {
-  DeleteIcon,
-  EditIcon,
-  HamburgerIcon,
-  ViewIcon,
-} from "@chakra-ui/icons";
+import { ViewIcon } from "@chakra-ui/icons";
 import ViewEmployeeDetail from "./ViewEmployeeDetail";
 import { api } from "configs";
 
 const EmployeeTable = ({ usersList, loading, setLoading }) => {
   const textColor = useColorModeValue("gray.700", "white");
+  const bgColor = useColorModeValue("white", "gray.700");
+
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const { dateFormat } = useDateTime();
+  const { dateFormat, presentDate } = useDateTime();
   const [userData, setUserData] = useState();
+  const [workHour, setWorkHour] = useState();
 
   const viewEmployeeHandler = async (id) => {
     try {
@@ -38,8 +32,15 @@ const EmployeeTable = ({ usersList, loading, setLoading }) => {
           `/hrConnect/api/user/getUserById/${id}`,
           true
         );
+
+        const res2 = await api.get(
+          `/hrConnect/api/attendance/getWorkloadOfSingleEmployee/${presentDate}/${id}`,
+          true
+        );
+
         if (res.message == "User found") {
           setUserData(res.user);
+          setWorkHour(res2);
         }
       }
     } catch (error) {
@@ -49,7 +50,13 @@ const EmployeeTable = ({ usersList, loading, setLoading }) => {
 
   return (
     <>
-      <TableContainer variant="simple" color={textColor}>
+      <TableContainer
+        variant="simple"
+        color={textColor}
+        bg={bgColor}
+        p="8px"
+        style={{ borderRadius: "10px" }}
+      >
         <Table size="md" variant="simple">
           <Thead>
             <Tr>
@@ -85,12 +92,6 @@ const EmployeeTable = ({ usersList, loading, setLoading }) => {
                 );
               })
             : ""}
-
-          <Tfoot>
-            <Tr>
-              <Th>Pagination to be added</Th>
-            </Tr>
-          </Tfoot>
         </Table>
       </TableContainer>
       <ViewEmployeeDetail
@@ -98,6 +99,7 @@ const EmployeeTable = ({ usersList, loading, setLoading }) => {
         onOpen={onOpen}
         onClose={onClose}
         user={userData}
+        workHour={workHour}
         loading={loading}
         setLoading={setLoading}
       />

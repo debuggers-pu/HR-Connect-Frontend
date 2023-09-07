@@ -27,13 +27,12 @@ const EmployeeManagement = () => {
         setLoading(false);
       }
     };
-
     getAllUsers();
   }, [search]);
 
   useEffect(() => {
     const searchUser = () => {
-      if (search?.length > 2) {
+      if (search?.length >= 2) {
         const filteredData = allUsers?.filter((data) =>
           data?.fullName?.includes(search)
         );

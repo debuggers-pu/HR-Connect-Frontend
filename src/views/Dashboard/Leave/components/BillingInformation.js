@@ -14,7 +14,7 @@ const BillingInformation = ({ title, leaveList, setLoading }) => {
     <Card my={{ lg: "24px" }} me={{ lg: "24px" }}>
       <Flex direction="column">
         <CardHeader py="12px">
-          <Text color={textColor} fontSize="lg" fontWeight="bold">
+          <Text color={"orange.500"} fontSize="lg" fontWeight="bold">
             {title}
           </Text>
         </CardHeader>

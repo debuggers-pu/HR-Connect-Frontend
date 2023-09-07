@@ -119,7 +119,7 @@ export default function Dashboard() {
         gap="24px"
       >
         <SalesOverview
-          title={"Sales Overview"}
+          title={"Employee Performace OverAll"}
           percentage={5}
           chart={<LineChart />}
         />
