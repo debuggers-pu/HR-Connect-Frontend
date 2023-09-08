@@ -29,7 +29,7 @@ class WorkLoadCart extends React.Component {
       series: [
         {
           name: "Work Hour",
-          data: [workHour?.totalWorkloadHours || 1],
+          data: [workHour || 1],
         },
       ],
     };

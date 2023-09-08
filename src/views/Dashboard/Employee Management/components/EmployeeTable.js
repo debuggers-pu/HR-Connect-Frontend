@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Table,
   TableContainer,
@@ -23,7 +23,6 @@ const EmployeeTable = ({ usersList, loading, setLoading }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { dateFormat, presentDate } = useDateTime();
   const [userData, setUserData] = useState();
-  const [workHour, setWorkHour] = useState();
 
   const viewEmployeeHandler = async (id) => {
     try {
@@ -33,14 +32,8 @@ const EmployeeTable = ({ usersList, loading, setLoading }) => {
           true
         );
 
-        const res2 = await api.get(
-          `/hrConnect/api/attendance/getWorkloadOfSingleEmployee/${presentDate}/${id}`,
-          true
-        );
-
         if (res.message == "User found") {
           setUserData(res.user);
-          setWorkHour(res2);
         }
       }
     } catch (error) {
@@ -99,7 +92,6 @@ const EmployeeTable = ({ usersList, loading, setLoading }) => {
         onOpen={onOpen}
         onClose={onClose}
         user={userData}
-        workHour={workHour}
         loading={loading}
         setLoading={setLoading}
       />
