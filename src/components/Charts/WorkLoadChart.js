@@ -1,3 +1,4 @@
+import useDateTime from "hooks/useDateTime";
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 
@@ -5,6 +6,7 @@ class WorkLoadCart extends React.Component {
   constructor(props) {
     super(props);
     const { workHour } = props;
+    const { presentDate } = useDateTime();
 
     this.state = {
       options: {
@@ -18,7 +20,7 @@ class WorkLoadCart extends React.Component {
           },
         },
         xaxis: {
-          categories: [workHour.date],
+          categories: [workHour?.date || presentDate],
         },
         yaxis: {
           max: 8,
@@ -37,8 +39,8 @@ class WorkLoadCart extends React.Component {
     return (
       <div className="chart">
         <ReactApexChart
-          options={this.state.options}
-          series={this.state.series}
+          options={this.state?.options}
+          series={this.state?.series}
           type="bar"
           height={100}
         />

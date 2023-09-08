@@ -18,6 +18,7 @@ const Events = () => {
     dateTime: "",
     eventType: "",
     desc: "",
+    allDay: "",
   });
 
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -41,14 +42,14 @@ const Events = () => {
     const setAllEvents = () => {
       const events = newEvent.map((item) => ({
         title: item.description,
-        start: new Date(item.datetime),
-        // allDay: true,
+        start: new Date(item?.datetime),
+        allDay: item?.allDay || false,
         backgroundColor: "#2c3e50",
       }));
       setBabbal(events);
     };
     setAllEvents();
-  }, [newEvent]);
+  }, [newEvent, loading]);
 
   const handleDateClick = (arg) => {
     onOpen();
@@ -56,6 +57,7 @@ const Events = () => {
       start: "",
       eventType: "",
       desc: "",
+      allDay: "",
     });
   };
 
@@ -86,7 +88,7 @@ const Events = () => {
         </Flex>{" "}
         <FullCalendar
           plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-          initialView="dayGridMonth"
+          initialView="timeGridDay"
           headerToolbar={{
             start: "today prev,next",
             center: "title",

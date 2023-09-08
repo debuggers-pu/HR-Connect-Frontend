@@ -12,13 +12,13 @@ import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
 import CardHeader from "components/Card/CardHeader.js";
 import TablesTableRow from "components/Tables/TablesTableRow";
-import { api } from "configs";
-import useDateTime from "hooks/useDateTime";
 import useUserHook from "hooks/useUserHook";
 
 const Authors = ({ title, captions }) => {
   const textColor = useColorModeValue("gray.700", "white");
   const { clockedInUsers, clockedOutUser } = useUserHook();
+
+  console.log({ clockedOutUser });
   return (
     <Card overflowX={{ sm: "scroll", xl: "hidden" }}>
       <CardHeader p="6px 0px 22px 0px">

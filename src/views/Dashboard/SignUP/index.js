@@ -45,7 +45,7 @@ function SignUp() {
       toast.success("Successfully Signed Up!");
       setLoading(false);
     } else {
-      toast.error("Unable To SignUp 😵😵😵");
+      toast.error(res.error);
       setLoading(false);
     }
     setLoading(false);

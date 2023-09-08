@@ -40,7 +40,7 @@ export default function CreateLeave({ setLoading, loading }) {
       setLoading(false);
       reset();
     } else {
-      toast.error("Leave Request Failed");
+      toast.error(res.error);
       setLoading(false);
     }
     setLoading(false);
