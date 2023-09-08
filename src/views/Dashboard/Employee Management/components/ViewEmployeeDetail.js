@@ -47,6 +47,7 @@ const ViewEmployeeDetail = ({
   const { leaveByUser } = useUserLeave();
   const [editToggler, setEditToggler] = useState(false);
   const [workHour, setWorkHour] = useState();
+  const { presentDate } = useDateTime();
 
   const editTogglerHandler = () => {
     setEditToggler(!editToggler);
@@ -77,7 +78,7 @@ const ViewEmployeeDetail = ({
   useEffect(() => {
     const GetWorkHour = async () => {
       const res = await api.get(
-        `/hrConnect/api/attendance/getWorkloadOfSingleEmployee/2023-09-08/${user?._id}`,
+        `/hrConnect/api/attendance/getWorkloadOfSingleEmployee/${presentDate}/${user?._id}`,
         true
       );
 
