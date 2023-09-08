@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-hot-toast";
 import {
@@ -31,10 +31,8 @@ import WorkLoadCart from "components/Charts/WorkLoadChart";
 
 const ViewEmployeeDetail = ({
   isOpen,
-
   onClose,
   user,
-  workHour,
 
   setLoading,
 }) => {
@@ -48,6 +46,7 @@ const ViewEmployeeDetail = ({
   const { dateFormat } = useDateTime();
   const { leaveByUser } = useUserLeave();
   const [editToggler, setEditToggler] = useState(false);
+  const [workHour, setWorkHour] = useState();
 
   const editTogglerHandler = () => {
     setEditToggler(!editToggler);
@@ -74,6 +73,23 @@ const ViewEmployeeDetail = ({
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const GetWorkHour = async () => {
+      const res = await api.get(
+        `/hrConnect/api/attendance/getWorkloadOfSingleEmployee/2023-09-08/${user?._id}`,
+        true
+      );
+
+      if (res) {
+        const absoluteData = Math.abs(res?.totalWorkloadHours);
+        const ceilHour = Math.ceil(absoluteData);
+        setWorkHour(ceilHour);
+      }
+    };
+
+    GetWorkHour();
+  }, []);
 
   return (
     <>

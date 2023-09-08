@@ -3,8 +3,6 @@ import {
   Box,
   Button,
   Flex,
-  Icon,
-  Spacer,
   Text,
   useColorModeValue,
   useDisclosure,
@@ -12,7 +10,7 @@ import {
 // Custom components
 import Card from "components/Card/Card.js";
 import CardBody from "components/Card/CardBody.js";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BiDoorOpen } from "react-icons/bi";
 import ClockInModal from "./ClockInModal";
 import useDateTime from "hooks/useDateTime";
@@ -40,28 +38,23 @@ const AttendenceComponent = ({
 
   const [workHour, setWorkHour] = useState();
 
-  const viewEmployeeHandler = async (id) => {
-    try {
-      if (id) {
-        const res = await api.get(
-          `/hrConnect/api/user/getUserById/${id}`,
-          true
-        );
+  useEffect(() => {
+    const GetWorkHour = async () => {
+      const id = localStorage?.getItem("userId");
+      const res = await api.get(
+        `/hrConnect/api/attendance/getWorkloadOfSingleEmployee/${presentDate}/${id}`,
+        true
+      );
 
-        const res2 = await api.get(
-          `/hrConnect/api/attendance/getWorkloadOfSingleEmployee/${presentDate}/${id}`,
-          true
-        );
-
-        if (res.message == "User found") {
-          setUserData(res.user);
-          setWorkHour(res2);
-        }
+      if (res) {
+        const absoluteData = Math.abs(res?.totalWorkloadHours);
+        const ceilHour = Math.ceil(absoluteData);
+        setWorkHour(ceilHour);
       }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+    };
+
+    GetWorkHour();
+  }, []);
 
   const handleClockIn = async () => {
     try {
@@ -147,14 +140,10 @@ const AttendenceComponent = ({
                 {description}
               </Text>
 
-              {clockedInStatus ? (
-                <Box mt={8}>
-                  <h2> Today's Working Hour</h2>
-                  <WorkLoadCart workHour={workHour} />{" "}
-                </Box>
-              ) : (
-                <Spacer />
-              )}
+              <Box mt={8}>
+                <h2> Today's Working Hour</h2>
+                <WorkLoadCart workHour={workHour} />{" "}
+              </Box>
 
               <Text as="b" fontSize="lg" ml={2}>
                 Today is {dayOfWeek},{presentDate}
