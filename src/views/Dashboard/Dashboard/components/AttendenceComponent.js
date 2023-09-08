@@ -1,5 +1,6 @@
 // Chakra imports
 import {
+  Box,
   Button,
   Flex,
   Icon,
@@ -17,12 +18,18 @@ import ClockInModal from "./ClockInModal";
 import useDateTime from "hooks/useDateTime";
 import { api } from "configs";
 import { toast } from "react-hot-toast";
+import WorkLoadCart from "components/Charts/WorkLoadChart";
 
-const BuiltByDevelopers = ({ title, name, description, image }) => {
+const AttendenceComponent = ({
+  title,
+  name,
+  description,
+  image,
+  loading,
+  setLoading,
+}) => {
   const textColor = useColorModeValue("gray.700", "white");
-
   const [clockInLocation, setClockInLocation] = useState();
-
   const [clockedInStatus, setClockedInStatus] = useState(
     localStorage.getItem("clockInStatus") === "true" // Parse the value to a boolean
   );
@@ -30,13 +37,39 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
   const { currentDateTime, presentDate, dayOfWeek } = useDateTime();
   // Clock In Modal
   const { isOpen, onOpen, onClose } = useDisclosure();
+
+  const [workHour, setWorkHour] = useState();
+
+  const viewEmployeeHandler = async (id) => {
+    try {
+      if (id) {
+        const res = await api.get(
+          `/hrConnect/api/user/getUserById/${id}`,
+          true
+        );
+
+        const res2 = await api.get(
+          `/hrConnect/api/attendance/getWorkloadOfSingleEmployee/${presentDate}/${id}`,
+          true
+        );
+
+        if (res.message == "User found") {
+          setUserData(res.user);
+          setWorkHour(res2);
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleClockIn = async () => {
     try {
       if (currentDateTime.length < 0) {
         toast.error("No Date Time");
         return;
       }
-
+      setLoading(true);
       const res = await api.post(
         "/hrConnect/api/attendance/clockIn",
         {
@@ -55,6 +88,7 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
         toast.error(res.error);
         onClose();
       }
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -65,7 +99,7 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
         toast.error("No Date Time");
         return;
       }
-
+      setLoading(true);
       const res = await api.post(
         "/hrConnect/api/attendance/clockOut",
         {},
@@ -81,6 +115,7 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
         toast.error(res.error);
         onClose();
       }
+      setLoading(false);
     } catch (error) {
       console.log(error);
     }
@@ -111,7 +146,15 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
               <Text fontSize="sm" color="gray.400" fontWeight="normal">
                 {description}
               </Text>
-              <Spacer />
+
+              {clockedInStatus ? (
+                <Box mt={8}>
+                  <h2> Today's Working Hour</h2>
+                  <WorkLoadCart workHour={workHour} />{" "}
+                </Box>
+              ) : (
+                <Spacer />
+              )}
 
               <Text as="b" fontSize="lg" ml={2}>
                 Today is {dayOfWeek},{presentDate}
@@ -165,4 +208,4 @@ const BuiltByDevelopers = ({ title, name, description, image }) => {
   );
 };
 
-export default BuiltByDevelopers;
+export default AttendenceComponent;

@@ -97,7 +97,7 @@ const Header = ({
               </Text>
             </Flex>
           </Flex>
-
+          {/* 
           <Flex
             direction={{ sm: "column", lg: "row" }}
             w={{ sm: "100%", md: "50%", lg: "auto" }}
@@ -115,7 +115,7 @@ const Header = ({
               Reset
             </Button>
             <Button colorScheme="orange">Update Picture</Button>
-          </Flex>
+          </Flex> */}
         </Flex>
       </Box>
     </Box>

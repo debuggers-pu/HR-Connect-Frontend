@@ -14,11 +14,10 @@ import CardHeader from "components/Card/CardHeader.js";
 import TablesTableRow from "components/Tables/TablesTableRow";
 import useUserHook from "hooks/useUserHook";
 
-const Authors = ({ title, captions }) => {
+const AttendenceTable = ({ title, captions }) => {
   const textColor = useColorModeValue("gray.700", "white");
   const { clockedInUsers, clockedOutUser } = useUserHook();
 
-  console.log({ clockedOutUser });
   return (
     <Card overflowX={{ sm: "scroll", xl: "hidden" }}>
       <CardHeader p="6px 0px 22px 0px">
@@ -71,4 +70,4 @@ const Authors = ({ title, captions }) => {
   );
 };
 
-export default Authors;
+export default AttendenceTable;

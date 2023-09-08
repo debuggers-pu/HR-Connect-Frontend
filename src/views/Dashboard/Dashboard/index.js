@@ -11,10 +11,9 @@ import peopleImage from "assets/img/people-image.png";
 import LineChart from "components/Charts/LineChart";
 import { DocumentIcon, GlobeIcon, WalletIcon } from "components/Icons/Icons.js";
 import ActiveUsers from "./components/ActiveUsers";
-import BuiltByDevelopers from "./components/BuiltByDevelopers";
+import AttendenceComponent from "./components/AttendenceComponent";
 import MiniStatistics from "./components/MiniStatistics";
 import SalesOverview from "./components/SalesOverview";
-import useCurrentUser from "hooks/useCurrentUser";
 import Conversations from "../Profile/components/Conversations";
 import PieChart from "components/Charts/PieChart";
 import useUserLeave from "hooks/useUserLeave";
@@ -62,7 +61,7 @@ export default function Dashboard() {
         my="26px"
         gap="24px"
       >
-        <BuiltByDevelopers
+        <AttendenceComponent
           title={"Have You Forgotten To Clock In ?"}
           name={"It's Time To Clock In"}
           description={"Clock in will record your attendence for today"}

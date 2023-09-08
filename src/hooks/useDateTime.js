@@ -18,7 +18,9 @@ const useDateTime = () => {
   const hours = currentDate.getHours();
   const amOrPm = hours >= 12 ? "PM" : "AM";
   const twelveHourFormat = hours % 12 || 12;
-  const time = ` ${twelveHourFormat}:${currentDate.getMinutes()}`;
+  const minutes = currentDate.getMinutes();
+  const minutesWithLeadingZero = minutes.toString().padStart(2, "0"); // Add leading zero if minutes is a single digit
+  const time = `${twelveHourFormat}:${minutesWithLeadingZero} ${amOrPm}`;
 
   const dateFormat = (data) => {
     return formatDate(data, {
