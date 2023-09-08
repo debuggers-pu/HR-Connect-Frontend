@@ -1,15 +1,16 @@
 // Chakra imports
 import { Flex, Image } from "@chakra-ui/react";
-import React from "react";
-import Authors from "./components/Authors";
+import React, { useState } from "react";
+import AttendenceTable from "./components/AttendenceTable";
 
-import BuiltByDevelopers from "../Dashboard/components/BuiltByDevelopers";
+import AttendenceComponent from "../Dashboard/components/AttendenceComponent";
 import peopleImage from "assets/img/people-image.png";
 
 function Tables() {
+  const [loading, setLoading] = useState(false);
   return (
     <Flex direction="column" pt={{ base: "120px", md: "75px" }} gap={6}>
-      <BuiltByDevelopers
+      <AttendenceComponent
         title={"Have You Forgotten To Clock In ?"}
         name={"It's Time To Clock In"}
         description={
@@ -22,8 +23,10 @@ function Tables() {
             minWidth={{ md: "300px", lg: "auto" }}
           />
         }
+        loading={loading}
+        setLoading={setLoading}
       />
-      <Authors
+      <AttendenceTable
         title={"Attendence Table"}
         captions={[
           "Employee",
@@ -32,6 +35,8 @@ function Tables() {
           "Status",
           "Clocked At",
         ]}
+        loading={loading}
+        setLoading={setLoading}
       />
       {/* <Projects
         title={"Projects Table"}

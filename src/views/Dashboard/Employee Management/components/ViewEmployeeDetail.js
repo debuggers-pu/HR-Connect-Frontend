@@ -31,11 +31,11 @@ import WorkLoadCart from "components/Charts/WorkLoadChart";
 
 const ViewEmployeeDetail = ({
   isOpen,
-  onOpen,
+
   onClose,
   user,
   workHour,
-  loading,
+
   setLoading,
 }) => {
   const btnRef = React.useRef();

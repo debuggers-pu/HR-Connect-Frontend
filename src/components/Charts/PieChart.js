@@ -4,6 +4,11 @@ import ReactApexChart from "react-apexcharts";
 class PieChart extends React.Component {
   constructor(props) {
     const { leaveCount, clockedInLength, clockedOutLength } = props;
+
+    const leaveNumber = leaveCount > 0 ? leaveCount : 1;
+    const clockInNumber = clockedInLength > 0 ? clockedInLength : 1;
+    const clockOutNumber = clockedOutLength > 0 ? clockedOutLength : 1;
+
     super(props);
 
     this.state = {
@@ -16,7 +21,7 @@ class PieChart extends React.Component {
         },
         labels: ["Clocked In Users", "Clocked Out Users", "Users on Leave"],
       },
-      series: [clockedInLength || 1, clockedOutLength || 1, leaveCount || 1],
+      series: [clockInNumber, clockOutNumber, leaveNumber],
     };
   }
 

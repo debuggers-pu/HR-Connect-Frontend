@@ -168,7 +168,7 @@ const ProfileInformation = () => {
               <Text p="4px 6px" fontSize="sm" color="gray.600">
                 Emergency Contact
               </Text>
-              <Input placeholder="Full Name" value={Date(user.createdAt)} />
+              <Input placeholder="Full Name" value="98765465377" />
             </GridItem>
           </Grid>
         </CardBody>

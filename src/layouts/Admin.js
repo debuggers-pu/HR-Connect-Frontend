@@ -140,7 +140,7 @@ export default function Dashboard(props) {
             </PanelContainer>
           </PanelContent>
         ) : null}
-        <Footer />
+        <Footer style={{ bottom: "0" }} />
         {/* <Portal>
           <FixedPlugin
             secondary={getActiveNavbar(routes)}

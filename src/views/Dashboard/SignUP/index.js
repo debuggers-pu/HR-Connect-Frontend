@@ -44,6 +44,12 @@ function SignUp() {
     if (res.status === "success") {
       toast.success("Successfully Signed Up!");
       setLoading(false);
+      setFullName("");
+      setUserName("");
+      setphoneNumber("");
+      setLocation("");
+      setEmail("");
+      setPassword("");
     } else {
       toast.error(res.error);
       setLoading(false);
