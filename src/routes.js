@@ -2,7 +2,7 @@
 import Dashboard from "views/Dashboard/Dashboard";
 import Attendence from "views/Dashboard/Attendence";
 import Leave from "views/Dashboard/Leave";
-import RTLPage from "views/Dashboard/RTL";
+
 import Profile from "views/Dashboard/Profile";
 import SignIn from "views/Auth/SignIn.js";
 import SignUp from "views/Dashboard/SignUP/index";
@@ -22,7 +22,7 @@ var dashRoutes = [
   {
     path: "/dashboard",
     name: "Dashboard",
-    // rtlName: "لوحة القيادة",
+
     icon: <HomeIcon color="inherit" />,
     component: Dashboard,
     layout: "/admin",
@@ -30,7 +30,7 @@ var dashRoutes = [
   {
     path: "/Attendence",
     name: "Attendence",
-    // rtlName: "لوحة القيادة",
+
     icon: <StatsIcon color="inherit" />,
     component: Attendence,
     layout: "/admin",
@@ -38,7 +38,7 @@ var dashRoutes = [
   {
     path: "/leave",
     name: "Leave",
-    rtlName: "لوحة القيادة",
+
     icon: <CreditIcon color="inherit" />,
     component: Leave,
     layout: "/admin",
@@ -46,7 +46,7 @@ var dashRoutes = [
   {
     path: "/events",
     name: "Events",
-    rtlName: "لوحة القيادة",
+
     icon: <FaCalendarCheck color="inherit" />,
     component: Events,
     layout: "/admin",
@@ -59,14 +59,6 @@ var dashRoutes = [
     layout: "/admin",
   },
 
-  // {
-  //   path: "/rtl-support-page",
-  //   name: "Events",
-  //   rtlName: "آرتيإل",
-  //   icon: <SupportIcon color="inherit" />,
-  //   component: RTLPage,
-  //   layout: "/rtl",
-  // },
   {
     name: "SETTINGS PAGES",
     category: "account",
@@ -76,7 +68,7 @@ var dashRoutes = [
       {
         path: "/profile",
         name: "Profile Settings",
-        rtlName: "لوحة القيادة",
+
         icon: <FaCog color="inherit" />,
         secondaryNavbar: true,
         component: Profile,
@@ -85,7 +77,7 @@ var dashRoutes = [
       {
         path: "/signin",
         name: "Sign In",
-        rtlName: "لوحة القيادة",
+
         icon: <DocumentIcon color="inherit" />,
         component: SignIn,
         layout: "/auth",
@@ -93,7 +85,6 @@ var dashRoutes = [
       {
         path: "/signup",
         name: "Sign Up",
-        rtlName: "لوحة القيادة",
         icon: <RocketIcon color="inherit" />,
         secondaryNavbar: true,
         component: SignUp,
