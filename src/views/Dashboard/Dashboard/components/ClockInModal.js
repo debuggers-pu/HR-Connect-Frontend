@@ -76,8 +76,6 @@ const ClockInModal = ({
                   }}
                 >
                   <option value={"office"}>Office</option>
-                  <option value={"home"}>Home</option>
-                  <option value={"other"}>Other</option>
                 </Select>
               </Box>
             </Grid>

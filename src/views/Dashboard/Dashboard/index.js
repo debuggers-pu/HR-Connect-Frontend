@@ -1,4 +1,5 @@
-// Chakra imports
+import React from "react";
+
 import {
   Flex,
   Grid,
@@ -6,27 +7,14 @@ import {
   SimpleGrid,
   useColorModeValue,
 } from "@chakra-ui/react";
-// assets
 import peopleImage from "assets/img/people-image.png";
-
 import LineChart from "components/Charts/LineChart";
-// Custom icons
-import {
-  CartIcon,
-  DocumentIcon,
-  GlobeIcon,
-  WalletIcon,
-} from "components/Icons/Icons.js";
-import React from "react";
-
+import { DocumentIcon, GlobeIcon, WalletIcon } from "components/Icons/Icons.js";
 import ActiveUsers from "./components/ActiveUsers";
 import BuiltByDevelopers from "./components/BuiltByDevelopers";
 import MiniStatistics from "./components/MiniStatistics";
-
 import SalesOverview from "./components/SalesOverview";
-
 import useCurrentUser from "hooks/useCurrentUser";
-
 import Conversations from "../Profile/components/Conversations";
 import PieChart from "components/Charts/PieChart";
 import useUserLeave from "hooks/useUserLeave";
@@ -34,17 +22,17 @@ import useUserHook from "hooks/useUserHook";
 
 export default function Dashboard() {
   const iconBoxInside = useColorModeValue("white", "white");
-  const { isAuthenticated, loading } = useCurrentUser();
-  const { leaveList } = useUserLeave();
+  const { approvedLeave } = useUserLeave();
   const { totalUsers } = useUserHook();
   const { clockedInUsers, clockedOutUser } = useUserHook();
+  const numberOnLeave = Number(approvedLeave?.length);
 
   return (
     <Flex flexDirection="column" pt={{ base: "120px", md: "75px" }}>
       <SimpleGrid columns={{ sm: 1, xl: 3 }} spacing="24px">
         <MiniStatistics
           title={"Total Employees"}
-          amount={totalUsers?.length || 0}
+          amount={totalUsers || 0}
           // percentage={-14}
           icon={<DocumentIcon h={"24px"} w={"24px"} color={iconBoxInside} />}
         />
@@ -56,7 +44,7 @@ export default function Dashboard() {
         />
         <MiniStatistics
           title={"Today's Leave"}
-          amount={leaveList?.length}
+          amount={numberOnLeave}
           // percentage={5}
           icon={<GlobeIcon h={"24px"} w={"24px"} color={iconBoxInside} />}
         />
@@ -105,7 +93,7 @@ export default function Dashboard() {
           percentage={23}
           chart={
             <PieChart
-              leaveCount={leaveList.length}
+              leaveCount={numberOnLeave}
               clockedInLength={clockedInUsers?.length}
               clockedOutLength={clockedOutUser?.length}
             />

@@ -15,6 +15,7 @@ const useUserLeave = () => {
         const result = res?.leaves.filter((data) => data.status == "pending");
         const result2 = res?.leaves.filter((data) => data.status == "approved");
         setLeaveList(result || "");
+
         setApprovedLeave(result2 || "");
         setLoading(false);
       }

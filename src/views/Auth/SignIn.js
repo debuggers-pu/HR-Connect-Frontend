@@ -44,7 +44,7 @@ function SignIn() {
       history.push("/admin/dashboard");
       setLoading(false);
     } else {
-      toast.error("Unable To Login 😵😵😵");
+      toast.error(res.errors[0]?.msg);
       setLoading(false);
     }
     setLoading(false);

@@ -13,6 +13,7 @@ import {
   Grid,
   Text,
   Input,
+  Checkbox,
 } from "@chakra-ui/react";
 
 import { api } from "configs";
@@ -32,22 +33,26 @@ const EventCreateModal = ({
   );
 
   const onSaveHandler = async () => {
+    setLoading(true);
     const newEvent = {
       description: addEvent.desc,
       eventType: addEvent.eventType,
       datetime: addEvent.dateTime,
-      allDay: true,
+      allDay: addEvent.allDay || false,
     };
 
     onEventAdd(newEvent);
-    setLoading(true);
+
     const res = await api.post(
       "/hrConnect/api/event/createEvent",
       newEvent,
       true
     );
+
     if (res?.status == "success") {
       toast.success(`Event added for ${newEvent.datetime}`);
+    } else {
+      toast.error(res.error);
     }
     setLoading(false);
     onClose();
@@ -75,6 +80,13 @@ const EventCreateModal = ({
       dateTime: newValue,
     }));
   };
+  const alldayHandler = (e) => {
+    const newValue = e.target.checked || "";
+    setAddEvent((prev) => ({
+      ...prev,
+      allDay: newValue,
+    }));
+  };
 
   return (
     <>
@@ -87,13 +99,21 @@ const EventCreateModal = ({
           <Divider />
           <ModalBody>
             <Grid templateColumns="repeat(1, 1fr)" gap={6}>
-              <Box>
-                <Text as="b">Date and Time</Text>
-                <Input
-                  size="md"
-                  type="datetime-local"
-                  onChange={(e) => eventDateHandler(e)}
-                />
+              <Box style={{ display: "flex", justifyContent: "space-between" }}>
+                <Box>
+                  <Text as="b">Date and Time</Text>
+                  <Input
+                    size="md"
+                    type="datetime-local"
+                    onChange={(e) => eventDateHandler(e)}
+                  />
+                </Box>
+                <Checkbox
+                  colorScheme="orange"
+                  onChange={(e) => alldayHandler(e)}
+                >
+                  All Day ?
+                </Checkbox>
               </Box>
 
               <Box>
@@ -104,7 +124,6 @@ const EventCreateModal = ({
                   onChange={(e) => eventTypeHandler(e)}
                 >
                   <option value="private">Private</option>
-                  <option value="public">Public</option>
                 </Select>
               </Box>
               <Box>

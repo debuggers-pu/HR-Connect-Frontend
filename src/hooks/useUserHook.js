@@ -7,15 +7,15 @@ const useUserHook = () => {
   const [loading, setLoading] = useState(false);
   const [clockedInUsers, setClockedInUsers] = useState([]);
   const [clockedOutUser, setClockedOutUsers] = useState([]);
-  const { presentDate, currentDateTime } = useDateTime();
+  const { presentDate } = useDateTime();
 
   useEffect(() => {
     const getTotalUser = async () => {
       setLoading(true);
-      const res = await api.get("/hrConnect/api/user/get-all-users", true);
+      const res = await api.get("/hrConnect/api/user/getUserCount", true);
 
       if (res.status != "failure") {
-        setTotalUser(res?.users);
+        setTotalUser(res?.userCount);
       }
     };
     getTotalUser();
