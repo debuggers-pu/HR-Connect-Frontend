@@ -1,7 +1,7 @@
 // Chakra imports
 import React from "react";
 import { Flex, Grid, Spinner, useColorModeValue } from "@chakra-ui/react";
-import avatar4 from "assets/img/avatars/avatar4.png";
+import avatar2 from "assets/img/avatars/avatar2.png";
 import ProfileBgImage from "assets/img/ProfileBackground.png";
 
 import ProfileInformation from "./components/ProfileInformation";
@@ -44,7 +44,7 @@ function Profile() {
       <Header
         backgroundHeader={ProfileBgImage}
         backgroundProfile={bgProfile}
-        avatarImage={avatar4}
+        avatarImage={avatar2}
         name={user?.fullName ? user.fullName : "USER"}
         email={user?.email ? user.email : "USER EMAIl"}
       />

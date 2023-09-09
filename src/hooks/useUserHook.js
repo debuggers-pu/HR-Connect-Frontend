@@ -45,6 +45,8 @@ const useUserHook = () => {
     totalUsers,
     clockedInUsers,
     clockedOutUser,
+    loading,
+    setLoading,
   };
 };
 

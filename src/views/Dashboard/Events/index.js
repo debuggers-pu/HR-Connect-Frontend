@@ -36,7 +36,7 @@ const Events = () => {
     };
     getAllEvents();
     setLoading(false);
-  }, [loading]);
+  }, [loading, events]);
 
   useEffect(() => {
     const setAllEvents = () => {
@@ -49,7 +49,7 @@ const Events = () => {
       setBabbal(events);
     };
     setAllEvents();
-  }, [newEvent, loading]);
+  }, [newEvent, loading, events]);
 
   const handleDateClick = (arg) => {
     onOpen();

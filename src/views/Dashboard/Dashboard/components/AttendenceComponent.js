@@ -57,12 +57,13 @@ const AttendenceComponent = ({
   }, []);
 
   const handleClockIn = async () => {
+    setLoading(true);
     try {
       if (currentDateTime.length < 0) {
         toast.error("No Date Time");
         return;
       }
-      setLoading(true);
+
       const res = await api.post(
         "/hrConnect/api/attendance/clockIn",
         {
