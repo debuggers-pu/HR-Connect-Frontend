@@ -22,7 +22,7 @@ import useUserHook from "hooks/useUserHook";
 export default function Dashboard() {
   const iconBoxInside = useColorModeValue("white", "white");
   const { approvedLeave } = useUserLeave();
-  const { totalUsers } = useUserHook();
+  const { totalUsers, loading, setLoading } = useUserHook();
   const { clockedInUsers, clockedOutUser } = useUserHook();
   const numberOnLeave = Number(approvedLeave?.length);
 
@@ -72,6 +72,8 @@ export default function Dashboard() {
               minWidth={{ md: "300px", lg: "auto" }}
             />
           }
+          loading={loading}
+          setLoading={setLoading}
         />
         {/* <WorkWithTheRockets
           backgroundImage={peopleImage}

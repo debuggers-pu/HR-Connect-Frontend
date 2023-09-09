@@ -15,6 +15,7 @@ import useDateTime from "hooks/useDateTime";
 import { ViewIcon } from "@chakra-ui/icons";
 import ViewEmployeeDetail from "./ViewEmployeeDetail";
 import { api } from "configs";
+import useUserLeave from "hooks/useUserLeave";
 
 const EmployeeTable = ({ usersList, loading, setLoading }) => {
   const textColor = useColorModeValue("gray.700", "white");
@@ -23,6 +24,7 @@ const EmployeeTable = ({ usersList, loading, setLoading }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { dateFormat, presentDate } = useDateTime();
   const [userData, setUserData] = useState();
+  const { getUserByID, userByID } = useUserLeave();
 
   const viewEmployeeHandler = async (id) => {
     try {
@@ -31,6 +33,7 @@ const EmployeeTable = ({ usersList, loading, setLoading }) => {
           `/hrConnect/api/user/getUserById/${id}`,
           true
         );
+        getUserByID(id);
 
         if (res.message == "User found") {
           setUserData(res.user);
@@ -94,6 +97,7 @@ const EmployeeTable = ({ usersList, loading, setLoading }) => {
         user={userData}
         loading={loading}
         setLoading={setLoading}
+        userByID={userByID}
       />
     </>
   );

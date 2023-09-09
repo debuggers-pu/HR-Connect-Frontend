@@ -33,8 +33,8 @@ const ViewEmployeeDetail = ({
   isOpen,
   onClose,
   user,
-
   setLoading,
+  userByID,
 }) => {
   const btnRef = React.useRef();
   const {
@@ -44,7 +44,7 @@ const ViewEmployeeDetail = ({
   } = useForm();
 
   const { dateFormat } = useDateTime();
-  const { leaveByUser } = useUserLeave();
+
   const [editToggler, setEditToggler] = useState(false);
   const [workHour, setWorkHour] = useState();
   const { presentDate } = useDateTime();
@@ -188,62 +188,70 @@ const ViewEmployeeDetail = ({
                 </Tr>
               </Thead>
               <Tbody>
-                {leaveByUser.length
-                  ? leaveByUser?.map((leaves) => {
-                      return (
-                        <Tr>
+                {userByID.length ? (
+                  userByID?.map((leaves) => {
+                    return (
+                      <Tr>
+                        <Td>
+                          <p>{leaves?.employeeName}</p>
+                        </Td>
+                        <Td>
+                          {dateFormat(leaves?.startDate)} to
+                          {" " + dateFormat(leaves?.endDate)}
+                        </Td>
+                        {leaves?.status == "pending" ? (
                           <Td>
-                            <p>{leaves?.employeeName}</p>
+                            {" "}
+                            <Badge
+                              variant="subtle"
+                              colorScheme="yellow"
+                              px={2}
+                              py={1}
+                              borderRadius={8}
+                            >
+                              {leaves?.status}
+                            </Badge>
                           </Td>
+                        ) : leaves?.status == "approved" ? (
                           <Td>
-                            {dateFormat(leaves?.startDate)} to
-                            {" " + dateFormat(leaves?.endDate)}
+                            {" "}
+                            <Badge
+                              variant="subtle"
+                              colorScheme="green"
+                              px={2}
+                              py={1}
+                              borderRadius={8}
+                            >
+                              {leaves?.status}
+                            </Badge>
                           </Td>
-                          {leaves?.status == "pending" ? (
-                            <Td>
-                              {" "}
-                              <Badge
-                                variant="subtle"
-                                colorScheme="yellow"
-                                px={2}
-                                py={1}
-                                borderRadius={8}
-                              >
-                                {leaves?.status}
-                              </Badge>
-                            </Td>
-                          ) : leaves?.status == "approved" ? (
-                            <Td>
-                              {" "}
-                              <Badge
-                                variant="subtle"
-                                colorScheme="green"
-                                px={2}
-                                py={1}
-                                borderRadius={8}
-                              >
-                                {leaves?.status}
-                              </Badge>
-                            </Td>
-                          ) : (
-                            <Td>
-                              {" "}
-                              <Badge
-                                variant="subtle"
-                                colorScheme="red"
-                                px={2}
-                                py={1}
-                                borderRadius={8}
-                              >
-                                {leaves?.status}
-                              </Badge>
-                            </Td>
-                          )}
-                          <Td>{leaves?.leaveType}</Td>
-                        </Tr>
-                      );
-                    })
-                  : "NO Leave Data Acquired"}
+                        ) : (
+                          <Td>
+                            {" "}
+                            <Badge
+                              variant="subtle"
+                              colorScheme="red"
+                              px={2}
+                              py={1}
+                              borderRadius={8}
+                            >
+                              {leaves?.status}
+                            </Badge>
+                          </Td>
+                        )}
+                        <Td>{leaves?.leaveType}</Td>
+                      </Tr>
+                    );
+                  })
+                ) : (
+                  <p
+                    style={{
+                      textAlign: "center",
+                    }}
+                  >
+                    NO Leave Data Acquired
+                  </p>
+                )}
               </Tbody>
             </Table>
           </DrawerBody>
