@@ -11,7 +11,7 @@ import {
 import React from "react";
 
 function TablesTableRow(props) {
-  const { name, location, startTime, status, date } = props;
+  const { name, location, startTime, status, date, email, type } = props;
 
   const textColor = useColorModeValue("gray.700", "white");
   const colorStatus = useColorModeValue("white", "gray.400");
@@ -31,7 +31,7 @@ function TablesTableRow(props) {
               {name}
             </Text>
             <Text fontSize="sm" color="gray.400" fontWeight="normal">
-              sandesh@herodai.com
+              {email}
             </Text>
           </Flex>
         </Flex>
@@ -45,7 +45,7 @@ function TablesTableRow(props) {
       <Td>
         <Flex direction="column">
           <Text fontSize="md" color={textColor} fontWeight="bold">
-            User
+            {typer}{" "}
           </Text>
           <Text fontSize="sm" color="gray.400" fontWeight="normal">
             Teacher

@@ -44,6 +44,8 @@ const AttendenceTable = ({ title, captions }) => {
                 <TablesTableRow
                   key={row._id}
                   name={row?.employeeName}
+                  email={row?.userEmail}
+                  type={row?.userType}
                   location={row.location}
                   startTime={row.startTime}
                   status={true}
@@ -56,6 +58,8 @@ const AttendenceTable = ({ title, captions }) => {
                 <TablesTableRow
                   key={row._id}
                   name={row?.employeeName}
+                  email={row?.userEmail}
+                  type={row?.userType}
                   location={row.location}
                   startTime={row.startTime}
                   status={false}
